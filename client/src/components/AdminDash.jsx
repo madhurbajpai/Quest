@@ -2,7 +2,7 @@ import React from 'react'
 
 const AdminDash = () => {
   return (
-    <div>MadhUr Mutthi</div>
+    <div>MadhUr Mutthi baaj</div>
   )
 }
 
