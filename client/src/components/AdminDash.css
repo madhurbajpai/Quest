@@ -1,0 +1,10 @@
+.admin-btn-grp{
+    width: 40%;
+    display: flex;
+    justify-content: space-between;
+    margin: 20px;
+}
+
+#table-history{
+    margin: 10px;
+}
