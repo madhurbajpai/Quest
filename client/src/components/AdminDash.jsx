@@ -1,8 +1,9 @@
 import React from 'react'
-
 const AdminDash = () => {
   return (
-    <div>MadhUr Mutthi baaj</div>
+    <div>
+      AdminPage
+    </div>
   )
 }
 
