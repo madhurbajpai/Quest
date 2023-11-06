@@ -2,7 +2,102 @@ import React from 'react'
 
 const HomeMid = () => {
   return (
-    <div>Shantanu Code Here</div>
+    <html lang="en">
+    <head>
+      <meta charSet="UTF-8" />
+      <meta name="viewport" content="width=device-width,initial-scale=1" />
+
+      <style>
+        {`
+        * {
+          font-family: 'Montserrat', sans-serif;
+        }
+        .bg-light {
+          background-color: transparent !important;
+        }
+        .carousel-item {
+          height: 100vh;
+          min-height: 300px;
+        }
+        .carousel-caption {
+          bottom: 220px;
+        }
+        .carousel-caption h5 {
+          font-size: 45px;
+          text-transform: uppercase;
+          letter-spacing: 2px;
+          margin-top: 25px;
+        }
+        .carousel-caption p {
+          width: 60%;
+          margin: auto;
+          font-size: 18px;
+          line-height: 1.9;
+        }
+        .carousel-caption a {
+          text-transform: uppercase;
+          text-decoration: none;
+          background: darkorange;
+          padding: 10px 30px;
+          display: inline-block;
+          color: #000;
+          margin-top: 15px;
+        }
+        .w-100 {
+          height: 100vh;
+        }
+        @media only screen and (max-width: 767px) {
+          .navbar-nav {
+            text-align: center;
+            background: rgba(0, 0, 0, 0.5);
+          }
+          .carousel-caption {
+            bottom: 165px;
+          }
+          .carousel-caption h5 {
+            font-size: 17px;
+          }
+          .carousel-caption a {
+            padding: 10px 15px;
+            font-size: 15px;
+          }
+        }
+        `}
+      </style>
+      <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700;900&display=swap"
+        rel="stylesheet"
+      />
+      <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+      />
+      <link
+        href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css"
+        rel="stylesheet"
+      />
+    </head>
+    <body>
+      <div className="carousel slide" data-bs-ride="carousel" id="carouselExampleIndicators">
+        <div className="carousel-inner">
+          <div className="carousel-item active">
+            <img alt="..." className="d-block w-100" src="https://i.postimg.cc/LsTXqTNZ/1.jpg" />
+            <div className="carousel-caption">
+              <h5 className="animated bounceInRight" style={{ animationDelay: '1s' }}>QUEST</h5>
+              <p className="animated bounceInLeft d-none d-md-block" style={{ animationDelay: '2s' }}>
+                Blah blah blah.
+              </p>
+              <p className="animated bounceInRight" style={{ animationDelay: '3s' }}>
+                <a href="#">Get Started</a>
+              </p>
+            </div>
+          </div>
+        </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+      </div>
+    </body>
+  </html>
+
   )
 }
 
