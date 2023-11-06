@@ -1,7 +1,9 @@
 import React from "react";
 import Header from "./Header";
+import {useNavigate} from 'react-router-dom'
 import "./AdminDash.css";
 const AdminDash = () => {
+  const navigate = useNavigate();
   return (
     <html>
       <head>
@@ -21,10 +23,10 @@ const AdminDash = () => {
           <div className="admin-btn">
             <h1 className="history-head">Custom/Random Quizes</h1>
           <div className="admin-btn-grp">
-            <button type="button" className="btn btn-primary">
+            <button type="button" className="btn btn-primary" onClick={()=>navigate('/custom-quiz')}>
               Create New Quizz
             </button>
-            <button type="button" className="btn btn-primary">
+            <button type="button" className="btn btn-primary" onClick={()=>navigate('/random-quiz')}>
               Create Random Quizz
             </button>
           </div>
