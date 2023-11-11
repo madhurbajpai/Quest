@@ -1,0 +1,22 @@
+.rand-head{
+    margin: 20px;
+    font-size: 30px;
+}
+
+.questions{
+    margin: 15px;
+    display: flex;
+    align-items: center;
+    height:auto;
+    display: inline-grid;
+    flex-direction: column;
+}
+
+label, input{
+    margin: 5px;
+    padding: 5px;
+}
+
+.show-quest{
+    margin:5px;
+}
