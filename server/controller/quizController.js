@@ -26,7 +26,8 @@ export const addQuiz = async (req,res) => {
         const savedQuiz = await quiz.save();
 
         if(savedQuiz){
-            return res.status(201).json({message: "Quiz created successfully"});
+            const quizId = savedQuiz._id;
+            return res.status(201).json({quiz: savedQuiz, quizId: quizId, message: "Quiz created successfully"});
         }
         return res.status(422).json({message: "Some error occured during adding quiz"});
 
