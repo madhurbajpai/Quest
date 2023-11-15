@@ -3,10 +3,10 @@ import Admin from "./Admin.js";
 import User from "./User.js";
 
 const quizSchema = mongoose.Schema({
-    id: {
-        type: String,
-        required: true
-    },
+    // id: {
+    //     type: String,
+    //     required: true
+    // },
     name: {
         type: String,
         required: true
