@@ -16,17 +16,16 @@ const HomeMid = () => {
           background-color: transparent !important;
         }
         .carousel-item {
-          height: 100vh;
-          min-height: 300px;
+          
         }
         .carousel-caption {
-          bottom: 220px;
+          
         }
         .carousel-caption h5 {
           font-size: 45px;
           text-transform: uppercase;
           letter-spacing: 2px;
-          margin-top: 25px;
+          
         }
         .carousel-caption p {
           width: 60%;
@@ -62,6 +61,10 @@ const HomeMid = () => {
             font-size: 15px;
           }
         }
+
+        #home-cap{
+          margin-top: ;
+        }
         `}
       </style>
       <link
@@ -78,11 +81,11 @@ const HomeMid = () => {
       />
     </head>
     <body>
-      <div className="carousel slide" data-bs-ride="carousel" id="carouselExampleIndicators">
+      <div className="carousel slide" data-bs-ride="carousel" id="carouselExampleIndicators" style={{}}>
         <div className="carousel-inner">
           <div className="carousel-item active">
-            <img alt="..." className="d-block w-100" src="https://i.postimg.cc/LsTXqTNZ/1.jpg" />
-            <div className="carousel-caption">
+            <img alt="..." className="d-block w-100" src="https://i.postimg.cc/LsTXqTNZ/1.jpg" style={{height: '600px'}}/>
+            <div className="carousel-caption" id='home-cap'>
               <h5 className="animated bounceInRight" style={{ animationDelay: '1s' }}>QUEST</h5>
               <p className="animated bounceInLeft d-none d-md-block" style={{ animationDelay: '2s' }}>
                 Blah blah blah.

@@ -1,0 +1,32 @@
+.admin-btn-grp{
+    width: 40%;
+    display: flex;
+    justify-content: space-between;
+    margin: 20px;
+}
+
+#table-history{
+    margin: 10px;
+}
+
+.admin-info{
+    display: flex;
+    justify-content: space-between;
+}
+.user-head{
+    margin: 10px;
+}
+
+#admin-account{
+    font-size: 50px;
+    margin: 20px;
+}
+
+#admin-account:hover{
+    cursor: pointer;
+}
+
+.history-head{
+    font-size: 30px;
+    margin: 10px;
+}
