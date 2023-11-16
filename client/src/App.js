@@ -5,6 +5,7 @@ import AdminDash from './components/AdminDash';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
 import RandomHome from './components/Random/RandomHome';
 import CustomHome from './components/CustomQuizz/CustomHome';
+import Quizcode from './components/userlogin/Quizcode';
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
         <Route path='/admin' element={<AdminDash />}></Route>
         <Route path='/random-quiz' element={<RandomHome />}></Route>
         <Route path='/custom-quiz' element={<CustomHome />}></Route>
+        <Route path='/code' element={<Quizcode />}></Route>
       </Routes>
     </Router>
   );

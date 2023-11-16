@@ -9,14 +9,21 @@ const HomeMid = () => {
 
       <style>
         {`
-        * {
+
+          body {
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            overflow: hidden; /* Prevent scrolling */
+          }
+         {
           font-family: 'Montserrat', sans-serif;
         }
         .bg-light {
           background-color: transparent !important;
         }
         .carousel-item {
-          
+          height:100%;
         }
         .carousel-caption {
           
@@ -63,7 +70,10 @@ const HomeMid = () => {
         }
 
         #home-cap{
-          margin-top: ;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
         }
         `}
       </style>
@@ -84,7 +94,7 @@ const HomeMid = () => {
       <div className="carousel slide" data-bs-ride="carousel" id="carouselExampleIndicators" style={{}}>
         <div className="carousel-inner">
           <div className="carousel-item active">
-            <img alt="..." className="d-block w-100" src="https://i.postimg.cc/LsTXqTNZ/1.jpg" style={{height: '600px'}}/>
+            <img alt="..." className="d-block w-100" src="https://i.postimg.cc/LsTXqTNZ/1.jpg" style={{height: '90%'}}/>
             <div className="carousel-caption" id='home-cap'>
               <h5 className="animated bounceInRight" style={{ animationDelay: '1s' }}>QUEST</h5>
               <p className="animated bounceInLeft d-none d-md-block" style={{ animationDelay: '2s' }}>
