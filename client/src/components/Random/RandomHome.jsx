@@ -1,12 +1,24 @@
 import React, { useState } from "react";
 import Header from "../Header";
+import axios from 'axios';
 import "./RandomHome.css";
 const RandomHome = () => {
   const [data, setData] = useState([]);
+  const [saveActive, setsaveActive] = useState(false);
+  const [code, setCode] = useState('');
+  const [isClicked, setisClicked] = useState(false);
   const [noq, setNoq] = useState(1);
   const [category, setCategory] = useState("");
   const [difficulty, setDifficulty] = useState("");
   const [type, setType] = useState("");
+  const [name, setName] = useState("");
+  const [desc, setDesc] = useState("");
+  const [startTime, setstartTime] = useState('');
+  const [endTime, setendTime] = useState('');
+  const [duration, setDuration] = useState(0);
+  const adminId = '65531174c85545d1eaae421d';
+  const usersId = ['6553124e8993e4b34a4d5f43','65531311c460e7e9d52d3e0d'];
+
 
   const Difficulty = [
     { value: "", label: "Any Difficulty" },
@@ -50,10 +62,59 @@ const RandomHome = () => {
       const response = await fetch(URL);
       const data = await response.json();
       await setData(data);
+
     } catch (error) {
       console.log("Error fetching data", error);
     }
   };
+
+  const saveQuiz = async () => {
+    if(!name || !startTime || !endTime || !duration){
+      window.alert('Some fields are missing');
+      return ;
+    }
+    const suffleOptions = (array) => {
+      for(let i = array.length-1; i >= 0; i--){
+        array[i] = decodeHTMLEntities(array[i]);
+      }
+      for(let i = array.length-1; i > 0; i--){
+        const j = Math.floor(Math.random() * (i+1));
+        [array[i],array[j]] = [array[j],array[i]];
+      }
+      return array;
+    };
+    try{
+      const response = await axios.post('http://localhost:8000/add-quiz', {
+        name: name,
+        description: desc,
+        dateCreated: new Date(),
+        startTime: startTime,
+        endTime: endTime,
+        duration: duration,
+        createdBy: adminId,
+        attemptedBy: usersId,
+        questions: data.results.map((ques) => ({
+          questionText: decodeHTMLEntities(ques.question),
+          questionType: ques.type === 'multiple' ? ('multiple-choice'): (ques.type === 'boolean' ? 'true-false': 'short-answer'),
+          options: suffleOptions(ques.incorrect_answers.concat(ques.correct_answer)),
+          correctAnswer: ques.type === 'multiple' || ques.type === 'boolean' ? (decodeHTMLEntities(ques.correct_answer)) : "",
+          marks: 1
+        }))
+      })
+
+      if(response){
+        setsaveActive(true);
+        setCode(response.data.quizId);
+        console.log('quiz sent to backend')
+      }
+    }catch(error){
+      console.log("Some error occured during saving the quiz", error);
+    }
+  }
+
+  const createCode = () => {
+    setisClicked(true);
+  }
   function decodeHTMLEntities(input) {
     const doc = new DOMParser().parseFromString(input, "text/html");
     return doc.documentElement.textContent;
@@ -66,6 +127,52 @@ const RandomHome = () => {
       </div>
       <hr />
       <div className="questions">
+
+        <label for="inputEmail4">Name of the Quizz</label>
+        <input
+          type="text"
+          class="form-control"
+          id="inputEmail4"
+          required
+          onChange={(event) => setName(event.target.value)}
+        />
+
+        <label for="inputEmail4">Description of Quiz</label>
+        <input
+          type="text"
+          class="form-control"
+          id="inputEmail4"
+          onChange={(event) => setDesc(event.target.value)}
+        />
+
+
+        <label for="inputEmail4">Start Time of Quiz</label>
+        <input
+          type="datetime-local"
+          class="form-control"
+          id="inputEmail4"
+          required
+          onChange={(event) => setstartTime(event.target.value)}
+        />
+
+        <label for="inputEmail4">End Time of Quiz</label>
+        <input
+          type="datetime-local"
+          class="form-control"
+          id="inputEmail4"
+          required
+          onChange={(event) => setendTime(event.target.value)}
+        />
+
+        <label for="inputEmail4">Duration (in minutes)</label>
+        <input
+          type="number"
+          class="form-control"
+          id="inputEmail4"
+          required
+          onChange={(event) => setDuration(event.target.value)}
+        />
+
         <label for="inputEmail4">Number of Questions</label>
         <input
           type="number"
@@ -113,8 +220,18 @@ const RandomHome = () => {
       </div>
       <div className="sec3">
         <button className="rand-create" onClick={getquest}>
-          Create Quizz
+          Create Quiz
         </button>
+
+        <button className="rand-create" onClick={saveQuiz}>
+          Save Quiz
+        </button>
+        {saveActive ? (<button className="rand-create" onClick={createCode}>
+          Create Quiz Code
+        </button>): ""}
+        {
+          isClicked ? <div>{code}</div> : ""
+        }
       </div>
       <hr />
       <div className="show-quest">
@@ -123,9 +240,11 @@ const RandomHome = () => {
           : data.results.map((Questions, index) => {
               return (
                 <div className="question-sec">
-                  Ques {index+1}. {decodeHTMLEntities(Questions.question)}
+                  Ques {index+1}. {decodeHTMLEntities(Questions.question)}. {Questions.type}
                   {Questions.type === "multiple" ? (
                     <div className="options-multiple">
+                      
+                      {/* all: {decodeHTMLEntities(Questions.incorrect_answers)} <br /> */}
                       a: {decodeHTMLEntities(Questions.correct_answer)}
                       <br />
                       b: {decodeHTMLEntities(Questions.incorrect_answers[0])}
