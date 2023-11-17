@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const HomeMid = () => {
   return (
@@ -98,10 +99,10 @@ const HomeMid = () => {
             <div className="carousel-caption" id='home-cap'>
               <h5 className="animated bounceInRight" style={{ animationDelay: '1s' }}>QUEST</h5>
               <p className="animated bounceInLeft d-none d-md-block" style={{ animationDelay: '2s' }}>
-                Blah blah blah.
+                Create your <strong>Own</strong> Quiz and <strong>Random</strong> Quiz
               </p>
               <p className="animated bounceInRight" style={{ animationDelay: '3s' }}>
-                <a href="#">Get Started</a>
+                <Link to={'/register'}>Get Started</Link>
               </p>
             </div>
           </div>

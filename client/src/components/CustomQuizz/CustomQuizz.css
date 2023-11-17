@@ -22,6 +22,9 @@
     justify-content: center;
 }
 
+.custom-mid{
+    border-bottom: 5px solid white;
+}
 
 .custom-mid .inp{
     padding: 0 35px;

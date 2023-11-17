@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const Header = (props) => {
   return (
@@ -40,10 +41,10 @@ const Header = (props) => {
           {
             props.value === "active" ? ( <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
             <li className="nav-but">
-              <a className="btn btn-outline-light" href="#">Signup</a>
+              <Link to={'/register'} className="btn btn-outline-light">Signup</Link>
             </li>
             <li className="nav-but">
-              <a className="btn btn-outline-light" href="#">Signin</a>
+              <Link to={'/login'} className="btn btn-outline-light">Signin</Link>
             </li>
           </ul>) : ""
           }
