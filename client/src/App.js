@@ -7,6 +7,7 @@ import RandomHome from './components/Random/RandomHome';
 import CustomHome from './components/CustomQuizz/CustomHome';
 import Login from './components/LoginRegister/Login';
 import Register from './components/LoginRegister/Register';
+import Quizcode from './components/userlogin/Quizcode';
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path='/admin' element={<AdminDash />}></Route>
         <Route path='/random-quiz' element={<RandomHome />}></Route>
         <Route path='/custom-quiz' element={<CustomHome />}></Route>
+        <Route path='/code' element={<Quizcode />}></Route>
       </Routes>
     </Router>
   );
