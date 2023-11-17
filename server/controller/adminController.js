@@ -39,18 +39,18 @@ export const getAdmin = async (req,res) => {
         const {email, password} = req.body;
 
         if(!email || !password){
-            return res.status(422).json({message: "Something is missing"});
+            return res.status(200).json({message: "Something is missing"});
         }
 
         const admin = await Admin.findOne({email: email});
 
         if(!admin){
-            return res.status(422).json({message: "Admin does not exist"});
+            return res.status(200).json({message: "Admin does not exist"});
         }
 
         const isPasswordValid = await admin.password === password;
         if(!isPasswordValid){
-            return res.status(422).json({message: "Invalid Password"});
+            return res.status(200).json({message: "Invalid Password"});
         }
         return res.status(201).json({message: "Admin login successfully"});
     } catch(error){
