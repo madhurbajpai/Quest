@@ -17,7 +17,7 @@ export const addUser = async (req,res) => {
         const adminExist = await Admin.findOne({email: email});
 
         if(adminExist){
-            return res.status(422).json({error: "Already registered as Admin"});
+            return res.status(422).json({message: "Already registered as Admin"});
         }
 
         const user = new User({name,email,password});
@@ -25,7 +25,7 @@ export const addUser = async (req,res) => {
         if(userRegister){
             return res.status(201).json({message: "User registered successfully"});
         }
-        else return res.status(500).json({error: "Cannot Register"});
+        else return res.status(500).json({message: "Cannot Register"});
     }catch(error){
         return res.status(500).json(error.message);
     }
@@ -36,18 +36,18 @@ export const getUser = async (req,res) => {
         const {email, password} = req.body;
 
         if(!email || !password){
-            return res.status(422).json({message: "Something is missing"});
+            return res.status(200).json({message: "Something is missing"});
         }
 
         const user = await User.findOne({email: email});
 
         if(!user){
-            return res.status(422).json({message: "User does not exist"});
+            return res.status(200).json({message: "User does not exist"});
         }
 
         const isPasswordValid = await user.password === password;
         if(!isPasswordValid){
-            return res.status(422).json({message: "Invalid Password"});
+            return res.status(200).json({message: "Invalid Password"});
         }
         return res.status(201).json({message: "User login successfully"});
 
