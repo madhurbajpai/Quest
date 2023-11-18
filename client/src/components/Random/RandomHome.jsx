@@ -6,7 +6,7 @@ const RandomHome = () => {
   const [data, setData] = useState([]);
   const [saveActive, setsaveActive] = useState(false);
   const [code, setCode] = useState('');
-  const [isClicked, setisClicked] = useState(false);
+  const [isClicked, setisClicked] = useState(true);
   const [noq, setNoq] = useState(1);
   const [category, setCategory] = useState("");
   const [difficulty, setDifficulty] = useState("");
@@ -120,14 +120,18 @@ const RandomHome = () => {
     return doc.documentElement.textContent;
   }
   return (
-    <div className="random-main">
-      <Header />
-      <div className="sec1">
-        <h1 className="rand-head">Create Random Quizz</h1>
+    <div>
+         <Header />
+         <div className="head">
+        Create Random Quizz
       </div>
+    <div className="body1">
+   
+      <div className="auth-form-container1">
+      
       <hr />
-      <div className="questions">
-
+      <div className="forms1">
+<form className="register-forms1">
         <label for="inputEmail4">Name of the Quizz</label>
         <input
           type="text"
@@ -136,7 +140,7 @@ const RandomHome = () => {
           required
           onChange={(event) => setName(event.target.value)}
         />
-
+<div className="input-field1">
         <label for="inputEmail4">Description of Quiz</label>
         <input
           type="text"
@@ -144,8 +148,8 @@ const RandomHome = () => {
           id="inputEmail4"
           onChange={(event) => setDesc(event.target.value)}
         />
-
-
+</div>
+<div className="input-field1">
         <label for="inputEmail4">Start Time of Quiz</label>
         <input
           type="datetime-local"
@@ -154,7 +158,8 @@ const RandomHome = () => {
           required
           onChange={(event) => setstartTime(event.target.value)}
         />
-
+</div>
+<div className="input-field1">
         <label for="inputEmail4">End Time of Quiz</label>
         <input
           type="datetime-local"
@@ -163,7 +168,8 @@ const RandomHome = () => {
           required
           onChange={(event) => setendTime(event.target.value)}
         />
-
+</div>
+<div className="input-field1">
         <label for="inputEmail4">Duration (in minutes)</label>
         <input
           type="number"
@@ -172,7 +178,8 @@ const RandomHome = () => {
           required
           onChange={(event) => setDuration(event.target.value)}
         />
-
+</div>
+<div className="input-field1">
         <label for="inputEmail4">Number of Questions</label>
         <input
           type="number"
@@ -183,9 +190,11 @@ const RandomHome = () => {
           placeholder="Number of questions"
           onChange={(event) => setNoq(event.target.value)}
         />
+        </div>
+        <div >
         <label for="category">Choose a Category</label>
 
-        <select
+        <select className="drop"
           name="category"
           id="category"
           onChange={(event) => setCategory(event.target.value)}
@@ -194,10 +203,11 @@ const RandomHome = () => {
             <option value={option.value}>{option.label}</option>
           ))}
         </select>
-
+        </div>
+        <div >
         <label for="category">Choose a Difficulty</label>
 
-        <select
+        <select className="drop"
           name="difficulty"
           id="difficulty"
           onChange={(e) => setDifficulty(e.target.value)}
@@ -206,9 +216,10 @@ const RandomHome = () => {
             <option value={option.value}>{option.label}</option>
           ))}
         </select>
-
+        </div>
+    <div >
         <label for="type">Choose a Type</label>
-        <select
+        <select className="drop"
           name="type"
           id="type"
           onChange={(event) => setType(event.target.value)}
@@ -216,24 +227,30 @@ const RandomHome = () => {
           {Type.map((option, index) => (
             <option value={option.value}>{option.label}</option>
           ))}
+        
         </select>
+        </div>
+        </form>
       </div>
       <div className="sec3">
-        <button className="rand-create" onClick={getquest}>
+        <button  style={{ marginTop: "30px" }}
+                class="button-31" onClick={getquest}>
           Create Quiz
         </button>
 
-        <button className="rand-create" onClick={saveQuiz}>
+        <button  style={{ marginTop: "30px" }}
+                class="button-31" onClick={saveQuiz}>
           Save Quiz
         </button>
-        {saveActive ? (<button className="rand-create" onClick={createCode}>
+        {saveActive ? (<button  style={{ marginTop: "30px" }}
+                class="button-31" onClick={createCode}>
           Create Quiz Code
         </button>): ""}
         {
           isClicked ? <div>{code}</div> : ""
         }
       </div>
-      <hr />
+      {/* <hr /> */}
       <div className="show-quest">
         {data.length === 0
           ? " "
@@ -280,6 +297,8 @@ const RandomHome = () => {
               );
             })}
       </div>
+    </div>
+    </div>
     </div>
   );
 };

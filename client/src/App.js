@@ -8,13 +8,15 @@ import CustomHome from './components/CustomQuizz/CustomHome';
 import Login from './components/LoginRegister/Login';
 import Register from './components/LoginRegister/Register';
 import Quizcode from './components/userlogin/Quizcode';
+import HomeNew from './components/HomePage/HomeNew';
 
 function App() {
+  // const [currentForm,serCurrentForm]=useState('login');
   return (
     // <AdminDash />
     <Router>
       <Routes>
-        <Route index path='/' element={<Home />}></Route>
+        <Route index path='/' element={<HomeNew />}></Route>
         <Route path='/register' element={<Register />}></Route>
         <Route path='/login' element={<Login />}></Route>
         <Route path='/admin' element={<AdminDash />}></Route>
