@@ -1,0 +1,38 @@
+.custom-mid{
+    margin-top: -4px;
+    /* background-color: #white; */
+    height: 30vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #22092c;
+}
+
+.custom-head{
+    /* position: relative; */
+    max-width: 800px;
+    width: 100%;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
+    overflow: hidden;
+    
+}
+.one{
+    justify-content: center;
+}
+
+
+.custom-mid .inp{
+    padding: 0 35px;
+    /* background-color: red; */
+    border: none;
+    outline: none;
+    font-size: 16px;
+    border-bottom: 2px solid #ccc;
+    border-top: 2px solid transparent;
+}
+
+.custom-mid .inp:focus{
+    border-bottom-color: #22092c;
+}
