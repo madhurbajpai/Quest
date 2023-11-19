@@ -23,6 +23,7 @@ function App() {
         <Route path='/random-quiz' element={<RandomHome />}></Route>
         <Route path='/custom-quiz' element={<CustomHome />}></Route>
         <Route path='/code' element={<Quizcode />}></Route>
+        <Route path='/instruction' element={<Instruction />}></Route>
       </Routes>
     </Router>
   );
