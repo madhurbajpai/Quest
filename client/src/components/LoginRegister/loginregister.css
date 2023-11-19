@@ -7,14 +7,18 @@
     box-sizing: border-box;
     font-family: 'Poppins', sans-serif;
 }
-
+.home-bannerImage-container {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: -2;
+    max-width: 700px;
+  }
+   
 .body{
-    height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-color: #22092c;
-}
+   margin-left: 37%;
+   margin-top: 8%;
+} 
 
 .auth-form-container{
     position: relative;
@@ -62,7 +66,7 @@ input:focus{
 .button-30 {
   align-items: center;
   appearance: none;
-  background-color: #22092c;
+  background-color: #f05908;
   border-radius: 4px;
   border-width: 0;
   box-shadow: rgba(45, 35, 66, 0.4) 0 2px 4px,rgba(45, 35, 66, 0.3) 0 7px 13px -3px,#22092c,0 -3px 0 inset;
@@ -91,7 +95,7 @@ input:focus{
 }
 
 .button-30:hover {
-  box-shadow: rgba(45, 35, 66, 0.4) 0 4px 8px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #22092c 0 -3px 0 inset;
+  box-shadow: rgba(223, 238, 6, 0.4) 0 4px 8px, rgba(45, 35, 66, 0.3) 0 7px 13px -3px, #22092c 0 -3px 0 inset;
   transform: translateY(-2px);
 }
 

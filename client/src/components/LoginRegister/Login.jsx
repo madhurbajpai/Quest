@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import "./loginregister.css";
 import { Link } from "react-router-dom";
+import BannerBackground from "./home-banner-background.png";
 import Header from "../Header";
 import axios from "axios";
 
@@ -87,8 +88,15 @@ const Login = (props) => {
   return (
     <div>
       <Header />
+      <div>
+      
+     
       <div className="body">
+      <div className="home-bannerImage-container">
+          <img src={BannerBackground} alt="" />
+        </div>
         <div className="auth-form-container">
+          
           <div style={{ marginBottom: "30px" }}>
             <h2>Login</h2>
           </div>
@@ -161,6 +169,7 @@ const Login = (props) => {
           </div>
         </div>
       </div>
+    </div>
     </div>
   );
 };

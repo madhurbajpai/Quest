@@ -1,63 +1,87 @@
-import React from 'react'
+/* eslint-disable jsx-a11y/anchor-is-valid */
+import React, { useState } from "react";
+import Logo from "./Logo.png";
+import { BsCart2 } from "react-icons/bs";
+import { HiOutlineBars3 } from "react-icons/hi2";
+import Box from "@mui/material/Box";
+import Drawer from "@mui/material/Drawer";
+import List from "@mui/material/List";
+import Divider from "@mui/material/Divider";
+import ListItem from "@mui/material/ListItem";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import ListItemText from "@mui/material/ListItemText";
+import HomeIcon from "@mui/icons-material/Home";
+import InfoIcon from "@mui/icons-material/Info";
+import CommentRoundedIcon from "@mui/icons-material/CommentRounded";
+import PhoneRoundedIcon from "@mui/icons-material/PhoneRounded";
+import ShoppingCartRoundedIcon from "@mui/icons-material/ShoppingCartRounded";
 
-const Header = (props) => {
+const Navbar = () => {
+  const [openMenu, setOpenMenu] = useState(false);
+  const menuOptions = [
+    {
+      text: "Home",
+      icon: <HomeIcon />,
+    },
+    {
+      text: "About",
+      icon: <InfoIcon />,
+    },
+    {
+      text: "Testimonials",
+      icon: <CommentRoundedIcon />,
+    },
+    {
+      text: "Contact",
+      icon: <PhoneRoundedIcon />,
+    },
+    {
+      text: "Cart",
+      icon: <ShoppingCartRoundedIcon />,
+    },
+  ];
   return (
-    <html lang="en">
-    <head>
-      <meta charSet="utf-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <nav>
+      <div className="nav-logo-container">
+        <img className="logo" src={Logo} alt="" />
+      </div>
+      <div className="navbar-links-container">
+        <a href="">Home</a>
+        <a href="">About</a>
+        {/* <a href="">Testimonials</a> */}
+        <a href="">Contact</a>
+        {/* <a href="">
+          <BsCart2 className="navbar-cart-icon" />
+        </a> */}
+        {/* <button className="primary-button">Bookings Now</button> */}
+      </div>
+      <div className="navbar-menu-container">
+        <HiOutlineBars3 onClick={() => setOpenMenu(true)} />
+      </div>
+      <Drawer open={openMenu} onClose={() => setOpenMenu(false)} anchor="right">
+        <Box
+          sx={{ width: 250 }}
+          role="presentation"
+          onClick={() => setOpenMenu(false)}
+          onKeyDown={() => setOpenMenu(false)}
+        >
+          <List>
+            {menuOptions.map((item) => (
+              <ListItem key={item.text} disablePadding>
+                <ListItemButton>
+                  <ListItemIcon>{item.icon}</ListItemIcon>
+                  <ListItemText primary={item.text} />
+                </ListItemButton>
+              </ListItem>
+            ))}
+          </List>
+         
+          <Divider />
+        </Box>
+      </Drawer>
+    </nav>
+  );
+};
 
-      <style>
-        {`
-          .navbar .navbar-nav .nav-item a {
-            padding: 20px;
-            font-family: sellena-brush-font;
-          }
-          .navbar .navbar-nav .nav-but {
-            padding: 5px;
-          }
-          
-        `}
-      </style>
-
-      <link
-        href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
-        rel="stylesheet"
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
-        crossOrigin="anonymous"
-      />
-      <link rel="stylesheet" href="style.css" />
-      <title>Navbar</title>
-    </head>
-    <body>
-      <nav className="navbar navbar-expand-lg navbar-dark bg-dark bg-body-tertiary">
-        <div className="container-fluid">
-          <a className="navbar-brand" href="#">
-            <img  src="brain.png" alt="Logo" width="55" height="54" className="d-inline-block align-text-top" />
-           
-          </a>
-        </div>
-          {
-            props.value === "active" ? ( <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
-            <li className="nav-but">
-              <a className="btn btn-outline-light" href="#">Signup</a>
-            </li>
-            <li className="nav-but">
-              <a className="btn btn-outline-light" href="#">Signin</a>
-            </li>
-          </ul>) : ""
-          }
-       
-      </nav>
-
-      <script
-        src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
-        crossOrigin="anonymous"
-      ></script>
-    </body>
-  </html>
-  )
-}
-
-export default Header
+export default Navbar;

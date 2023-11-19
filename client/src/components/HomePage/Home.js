@@ -14,7 +14,7 @@ const Home = () => {
         </div>
         <div className="home-text-section">
           <h1 className="primary-heading">
-          Welcome to our Quest!🌟 
+          Welcome to our Quest website!🌟 
 
           </h1>
           <p className="primary-text">
@@ -23,7 +23,7 @@ const Home = () => {
 
           </p>
           <button className="secondary-button">
-            Connect with Us<FiArrowRight />{" "}
+           Get Started !<FiArrowRight />{" "}
           </button>
         </div>
         {/* <div className="home-image-section">
