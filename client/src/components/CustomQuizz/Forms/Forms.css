@@ -1,6 +1,7 @@
 .form-main {
   margin: 0;
   background-color: #22092c;
+  height: auto;
 }
 .custom-mid {
   display: flex;
@@ -117,3 +118,4 @@
     padding: 10px 30px;
   }
 }
+

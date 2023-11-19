@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import "./Forms.css";
 import CropOriginal from "@mui/icons-material/CropOriginal";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
@@ -6,6 +6,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
 import { IconButton } from "@mui/material";
 import CloseIcon from "@mui/icons-material/Close";
+import QuizContext from "../context/QuizContext";
 const Forms = () => {
   const [questions, setQuestions] = useState([
     {
@@ -22,6 +23,11 @@ const Forms = () => {
       points: 0,
     },
   ]);
+
+  const {setForm} = useContext(QuizContext);
+  useEffect(()=>{
+    setForm({questions})
+  },[questions,setQuestions]);
 
   function changeQuestion(text, i) {
     var newQuestion = [...questions];
@@ -82,13 +88,17 @@ const Forms = () => {
     var newQuestion = [...questions];
     newQuestion.splice(i + 1, 0, {
       questionText: "New Question",
-      questionType: "radio",
+      questionType: "multiple-choice",
       options: [{ optionText: "Option 1" }],
       answer: false,
       answerKey: "",
       points: 0,
     });
     setQuestions(newQuestion);
+    window.scrollTo({
+      top: document.body.scrollHeight,
+      behavior: 'smooth', // Optional: Adds a smooth scrolling effect
+    });
   }
 
   function deleteQuestions(i) {
@@ -155,7 +165,8 @@ const Forms = () => {
                 {ques.options.map((op, j) => (
                   <div className="add-question-body" key={j}>
                     <div>
-                    {questions[i].questionType == 'multiple-choice' || questions[i].questionType == 'true-false' ?
+                      {/* only for symbol */}
+                    {questions[i].questionType === 'multiple-choice' || questions[i].questionType === 'true-false' ?
                       <input
                         type='radio'
                         disabled

@@ -8,10 +8,14 @@ import CustomHome from './components/CustomQuizz/CustomHome';
 import Login from './components/LoginRegister/Login';
 import Register from './components/LoginRegister/Register';
 import Quizcode from './components/userlogin/Quizcode';
+import QuizContextProvider from './components/CustomQuizz/context/QuizContextProvider';
+import LoginContextProvider from './components/CustomQuizz/context/LoginContextProvider';
+
 
 function App() {
   return (
     // <AdminDash />
+    <LoginContextProvider>
     <Router>
       <Routes>
         <Route index path='/' element={<Home />}></Route>
@@ -19,10 +23,11 @@ function App() {
         <Route path='/login' element={<Login />}></Route>
         <Route path='/admin' element={<AdminDash />}></Route>
         <Route path='/random-quiz' element={<RandomHome />}></Route>
-        <Route path='/custom-quiz' element={<CustomHome />}></Route>
+        <Route path='/custom-quiz' element={<QuizContextProvider><CustomHome /></QuizContextProvider>}></Route>
         <Route path='/code' element={<Quizcode />}></Route>
       </Routes>
     </Router>
+    </LoginContextProvider>
   );
 }
 
