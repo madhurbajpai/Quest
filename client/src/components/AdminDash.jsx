@@ -1,41 +1,82 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import Header from "./Header";
 import {useNavigate} from 'react-router-dom'
 import "./AdminDash.css";
+import BannerBackground from "./home-banner-background.png";
+import LoginContext from "./CustomQuizz/context/LoginContext";
+import axios from "axios";
+import VisibilityIcon from '@mui/icons-material/Visibility';
+import DeleteIcon from '@mui/icons-material/Delete';
 const AdminDash = () => {
+  const [quizDetail, setQuizDetail] = useState([]);
   const navigate = useNavigate();
+
+  const {loginId} = useContext(LoginContext);
+
+  useEffect(() => {
+    if (loginId && loginId.quizIds) {
+      // console.log('Login ID on page load:', loginId.quizIds);
+      getHistory();
+      // Add any additional logic you want to execute on page load here
+    }
+  }, [loginId]);
+
+  const deleteQuiz = async (i) => {
+    // console.log(loginId.quizIds, loginId.quizIds[i]);
+    const response = await axios.post('http://localhost:8000/delete-quiz',{
+        quizId: loginId.quizIds[i]
+    })
+
+    if(response){
+      window.alert('Quiz Deleted successfully')
+      getHistory();
+    }
+  }
+
+  const getHistory = async () => {
+    // console.log('here is login id',loginId.adminId)
+    try{
+      const response = await axios.post('http://localhost:8000/get-quizzes',{
+        quizIds: loginId.quizIds
+      })
+      if(response){
+        setQuizDetail(response.data.quizzes);
+        // console.log(quizDetail);
+      }
+    }catch(error){
+      console.log('Some Error Occured getting quiz history',error);
+    }
+  }
+
   return (
-    <html>
-      <head>
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
-        />
-      </head>
-      <body>
-        <div className="admin-main">
+      <div>
+        {!loginId?(<div className="admin-main">
           <Header />
+           <div className="home-bannerImage-container">
+          <img src={BannerBackground} alt="" />
+        </div>
           <div className="admin-info">
-            <h1 className="user-head">Welcome, Admin</h1>
-            <span class="material-symbols-outlined" id='admin-account'>account_circle</span>
+            <h1 className="user-head">Welcome to Dashboard</h1>   
+            {/* add {loginId.adminName} after Welcome */}
           </div>
-          <hr />
+          
           <div className="admin-btn">
-            <h1 className="history-head">Custom/Random Quizes</h1>
+            {/* <h1 className="history-head">Custom/Random Quizes</h1> */}
           <div className="admin-btn-grp">
-            <button type="button" className="btn btn-primary" onClick={()=>navigate('/custom-quiz')}>
+            <button type="button" className="btn btn-primary1" onClick={()=>navigate('/custom-quiz')}>
               Create New Quizz
             </button>
-            <button type="button" className="btn btn-primary" onClick={()=>navigate('/random-quiz')}>
+            <button type="button" className="btn btn-primary1" onClick={()=>navigate('/random-quiz')}>
               Create Random Quizz
             </button>
           </div>
           </div>
-          <hr />
+          {/* <hr /> */}
           <div className="admin-history">
-            <h1 className="history-head">Previous Quizes</h1>
+            <h1 className="history-head">Your Previous Quizes :</h1>
+            {quizDetail !== undefined?(
             <table
-              className="table table-striped table-hover"
+              className="table"
               id="table-history"
             >
               <thead>
@@ -50,64 +91,32 @@ const AdminDash = () => {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <th scope="row">1</th>
-                  <td>Geography</td>
-                  <td>01/11/2023</td>
-                  <td>15 mins</td>
-                  <td>40</td>
+                {
+              quizDetail.map((quiz,i)=>(
+                <tr key={i}>
+                  <th scope="row">{i+1}</th>
+                  <td>{quiz.name}</td>
+                  <td>{quiz.dateCreated.split('T')[0]}</td>
+                  <td>{quiz.duration} mins</td>
+                  <td>{quiz.attemptedBy.length}</td>
                   <td>
-                    <span class="material-symbols-outlined">visibility</span>
+                    <VisibilityIcon />
                   </td>
                   <td>
-                    <span class="material-symbols-outlined">delete</span>
-                  </td>
-                </tr>
-                <tr>
-                  <th scope="row">2</th>
-                  <td>History</td>
-                  <td>02/11/2023</td>
-                  <td>20 mins</td>
-                  <td>35</td>
-                  <td>
-                    <span class="material-symbols-outlined">visibility</span>
-                  </td>
-                  <td>
-                    <span class="material-symbols-outlined">delete</span>
+                    <DeleteIcon onClick={()=>{deleteQuiz(i)}}/>
                   </td>
                 </tr>
-                <tr>
-                  <th scope="row">3</th>
-                  <td>Polity</td>
-                  <td>03/11/2023</td>
-                  <td>30 mins</td>
-                  <td>20</td>
-                  <td>
-                    <span class="material-symbols-outlined">visibility</span>
-                  </td>
-                  <td>
-                    <span class="material-symbols-outlined">delete</span>
-                  </td>
-                </tr>
-                <tr>
-                  <th scope="row">4</th>
-                  <td>General Knowledge</td>
-                  <td>04/11/2023</td>
-                  <td>15 mins</td>
-                  <td>10</td>
-                  <td>
-                    <span class="material-symbols-outlined">visibility</span>
-                  </td>
-                  <td>
-                    <span class="material-symbols-outlined">delete</span>
-                  </td>
-                </tr>
+              ))
+                }
+                
+                
               </tbody>
-            </table>
+            </table>):(<div>No Quiz History</div>)}
+            
           </div>
+        </div>):(<div>First Login Please</div>)}
+        
         </div>
-      </body>
-    </html>
   );
 };
 

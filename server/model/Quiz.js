@@ -60,9 +60,9 @@ const quizSchema = mongoose.Schema({
             ],
             correctAnswer: {
                 type: String,
-                required: function () {
-                    return this.questionType === 'multiple-choice' || this.questionType === 'true-false';
-                }
+                // required: function () {
+                //     return this.questionType === 'multiple-choice' || this.questionType === 'true-false';
+                // }
             },
             marks: {
                 type: Number,

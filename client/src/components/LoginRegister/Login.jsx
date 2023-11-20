@@ -1,9 +1,11 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
+import {useNavigate} from 'react-router-dom'
 import "./loginregister.css";
 import { Link } from "react-router-dom";
 import BannerBackground from "./home-banner-background.png";
 import Header from "../Header";
 import axios from "axios";
+import LoginContext from "../CustomQuizz/context/LoginContext";
 
 const Login = (props) => {
   const [email, setEmail] = useState("");
@@ -11,6 +13,10 @@ const Login = (props) => {
   const [role, setRole] = useState("user");
   const [isError, setisError] = useState(false);
   const [error, setError] = useState("Some Error Occured!");
+
+  const navigate = useNavigate();
+
+  const {setloginId} = useContext(LoginContext);
 
   const check = async (e) => {
     e.preventDefault();
@@ -61,6 +67,7 @@ const Login = (props) => {
           email: email,
           password: pass,
         });
+        // console.log(response);
         if (!response) {
           setisError(true);
           setError("Something went wrong");
@@ -77,7 +84,9 @@ const Login = (props) => {
           setError("Invalid email or Password");
           return ;
         } 
-        window.alert("Admin Login successfully");
+        setloginId({adminId: response.data.adminId, adminName: response.data.adminName, adminEmail: response.data.adminEmail, quizIds: response.data.quizIds});
+        navigate('/admin');
+        // window.alert("Admin Login successfully");
       } catch (error) {
         setisError(true);
         setError("An error occurred during login");

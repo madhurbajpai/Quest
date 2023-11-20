@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Header from "../Header";
 import axios from 'axios';
 import "./RandomHome.css";
 import BannerBackground from "./home-banner-background.png";
+import LoginContext from "../CustomQuizz/context/LoginContext";
 const RandomHome = () => {
   const [data, setData] = useState([]);
   const [saveActive, setsaveActive] = useState(false);
@@ -17,7 +18,9 @@ const RandomHome = () => {
   const [startTime, setstartTime] = useState('');
   const [endTime, setendTime] = useState('');
   const [duration, setDuration] = useState(0);
-  const adminId = '65531174c85545d1eaae421d';
+
+  const {loginId} = useContext(LoginContext);
+  const adminId = loginId.adminId;
   const usersId = ['6553124e8993e4b34a4d5f43','65531311c460e7e9d52d3e0d'];
 
 

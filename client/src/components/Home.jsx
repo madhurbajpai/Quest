@@ -4,7 +4,7 @@ import HomeMid from './HomeMid'
 const Home = () => {
   return (
     <div className="main-home">
-        <Header />
+        <Header value="active"/>
         <HomeMid />
     </div>
   )
