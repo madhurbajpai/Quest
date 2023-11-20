@@ -10,6 +10,7 @@ import Register from './components/LoginRegister/Register';
 import Quizcode from './components/userlogin/Quizcode';
 import QuizContextProvider from './components/CustomQuizz/context/QuizContextProvider';
 import LoginContextProvider from './components/CustomQuizz/context/LoginContextProvider';
+import AdminQuizDetail from './components/AdminQuizDetail';
 import HomeNew from './components/HomePage/HomeNew';
 import Instruction from './components/userlogin/Instruction';
 import UserQuiz from './components/UserQuiz/User_Quiz';
@@ -29,6 +30,7 @@ function App() {
         <Route path='/random-quiz' element={<RandomHome />}></Route>
         <Route path='/custom-quiz' element={<QuizContextProvider><CustomHome /></QuizContextProvider>}></Route>
         <Route path='/code' element={<Quizcode />}></Route>
+        <Route path='/detail-quiz' element={<AdminQuizDetail />}></Route>
         <Route path='/Instruct' element={<Instruction />}></Route>
         <Route path='/user' element={<UserQuiz />}></Route>
       </Routes>
