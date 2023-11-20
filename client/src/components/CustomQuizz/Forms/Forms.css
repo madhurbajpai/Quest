@@ -1,6 +1,28 @@
-.form-main{
-    position: relative;
-    max-width: 430px;
+.form-main {
+  margin: 0;
+  background-color: #22092c;
+  height: auto;
+}
+.custom-mid {
+  display: flex;
+  flex-direction: column;
+}
+
+.custom-ques {
+  margin-bottom: 10px;
+  height: 180px;
+}
+
+.question-boxes{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.questions{
+  position: relative;
+    width: 700px;
     width: 100%;
     background: #fff;
     border-radius: 10px;
@@ -8,11 +30,92 @@
     overflow: hidden;
 }
 
-.form-section{
-    max-width: 800px;
-    width: 100%;
-    background: #fff;
-    border-radius: 10px;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.5);
-    overflow: hidden;
+.add-question-top{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-top: 10px;
+  margin-bottom: 15px;
 }
+
+.questiontext{
+  width: 400px;
+}
+.add-option{
+  border: none;
+  background-color: inherit;
+  color: blue;
+  width: 101px;
+}
+.add-option:hover{
+  font-weight: 500;
+}
+
+.add-question-body{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.option-input{
+  width: 500px;
+  transition: .1s ease-in-out;
+}
+
+.disabled-inp{
+  height: 20px;
+  width: 15px;
+  margin-left: -8px;
+  margin-right: 5px;
+}
+
+.add-footer{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin: 10px;
+}
+
+.add-question-left{
+  margin-right: auto;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.add-question-right{
+  color: #13aa52;
+}
+
+.question-btn{
+  background-color: #13aa52;
+  border: 1px solid #13aa52;
+  border-radius: 4px;
+  box-shadow: rgba(0, 0, 0, .1) 0 2px 4px 0;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  font-family: "Akzidenz Grotesk BQ Medium", -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  outline: none;
+  outline: 0;
+  text-align: center;
+  transform: translateY(0);
+  transition: transform 150ms, box-shadow 150ms;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.question-btn:hover {
+  box-shadow: rgba(0, 0, 0, .15) 0 3px 9px 0;
+  transform: translateY(-2px);
+}
+
+@media (min-width: 768px) {
+  .question-btn {
+    padding: 10px 30px;
+  }
+}
+
