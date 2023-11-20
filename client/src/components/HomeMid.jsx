@@ -14,7 +14,7 @@ const HomeMid = () => {
             height: 100%;
             margin: 0;
             padding: 0;
-            overflow: hidden; /* Prevent scrolling */
+            overflow: hidden; 
           }
          {
           font-family: 'Montserrat', sans-serif;
