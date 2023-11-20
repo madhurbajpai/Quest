@@ -26,9 +26,6 @@ const Home = () => {
            Get Started !<FiArrowRight />{" "}
           </button>
         </div>
-        {/* <div className="home-image-section">
-          <img className="" src={BannerImage} alt="" />
-        </div> */}
       </div>
     </div>
   );

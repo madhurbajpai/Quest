@@ -28,18 +28,12 @@ const Navbar = () => {
       text: "About",
       icon: <InfoIcon />,
     },
-    {
-      text: "Testimonials",
-      icon: <CommentRoundedIcon />,
-    },
+    
     {
       text: "Contact",
       icon: <PhoneRoundedIcon />,
     },
-    {
-      text: "Cart",
-      icon: <ShoppingCartRoundedIcon />,
-    },
+  
   ];
   return (
     <nav>
@@ -49,12 +43,7 @@ const Navbar = () => {
       <div className="navbar-links-container">
         <a href="">Home</a>
         <a href="">About</a>
-        {/* <a href="">Testimonials</a> */}
         <a href="">Contact</a>
-        {/* <a href="">
-          <BsCart2 className="navbar-cart-icon" />
-        </a> */}
-        {/* <button className="primary-button">Bookings Now</button> */}
       </div>
       <div className="navbar-menu-container">
         <HiOutlineBars3 onClick={() => setOpenMenu(true)} />
