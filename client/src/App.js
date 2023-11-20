@@ -9,6 +9,10 @@ import Login from './components/LoginRegister/Login';
 import Register from './components/LoginRegister/Register';
 import Quizcode from './components/userlogin/Quizcode';
 import HomeNew from './components/HomePage/HomeNew';
+import Instruction from './components/userlogin/Instruction';
+import UserQuiz from './components/UserQuiz/User_Quiz';
+
+
 
 function App() {
   // const [currentForm,serCurrentForm]=useState('login');
@@ -23,6 +27,8 @@ function App() {
         <Route path='/random-quiz' element={<RandomHome />}></Route>
         <Route path='/custom-quiz' element={<CustomHome />}></Route>
         <Route path='/code' element={<Quizcode />}></Route>
+        <Route path='/Instruct' element={<Instruction />}></Route>
+        <Route path='/user' element={<UserQuiz />}></Route>
       </Routes>
     </Router>
   );
