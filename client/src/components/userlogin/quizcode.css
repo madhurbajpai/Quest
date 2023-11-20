@@ -1,0 +1,61 @@
+.codecontainer {
+  
+    max-width: 600px;
+    margin: auto;
+    width: 100%;
+    padding: 120px;
+    background-color: grey; 
+    border: 1px solid #ddd; 
+    border-radius: 8px; 
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .codeheader {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  
+  .codetext {
+    font-size: 30px;
+    color: #333; 
+  }
+  
+  .codeunderline {
+    width: 100px;
+    height: 3px;
+    background-color: #333; 
+    margin: 10px auto;
+  }
+  
+  .codeinputs {
+    margin-bottom: 30px;
+  }
+  
+  .codeinput {
+    margin-bottom: 30px;
+  }
+  
+  .codeinput {
+    width: 100%;
+    padding: 30px;
+    border: 1px solid #ccc; 
+    border-radius: 4px; 
+  }
+  
+  .codesubmit-container {
+    text-align: center;
+  }
+  
+  .codesubmit {
+    background-color: #4caf50; 
+    color: #fff; 
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s ease; 
+  }
+  
+  .codesubmit:hover {
+    background-color: #45a049; 
+  }
