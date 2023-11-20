@@ -3,6 +3,7 @@ import "./loginregister.css";
 import { Link } from "react-router-dom";
 import Header from "../Header";
 import axios from "axios";
+import BannerBackground from "./home-banner-background.png";
 const Register = (props) => {
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
@@ -83,6 +84,9 @@ const Register = (props) => {
     <div>
       <Header />
       <div className="body">
+      <div className="home-bannerImage-container">
+          <img src={BannerBackground} alt="" />
+        </div>
         <div className="auth-form-container">
           <div style={{ marginBottom: "30px" }}>
             <h2>Register</h2>
