@@ -14,6 +14,8 @@ import AdminQuizDetail from './components/AdminQuizDetail';
 import HomeNew from './components/HomePage/HomeNew';
 import Instruction from './components/userlogin/Instruction';
 import UserQuiz from './components/UserQuiz/User_Quiz';
+import About from './components/HomePage/About';
+import Contact from './components/HomePage/Contact';
 
 
 function App() {
@@ -33,6 +35,8 @@ function App() {
         <Route path='/detail-quiz' element={<AdminQuizDetail />}></Route>
         <Route path='/Instruct' element={<Instruction />}></Route>
         <Route path='/user' element={<UserQuiz />}></Route>
+        <Route path='/about' element={<About />}></Route>
+        <Route path='/contact' element={<Contact />}></Route>
       </Routes>
     </Router>
     </LoginContextProvider>

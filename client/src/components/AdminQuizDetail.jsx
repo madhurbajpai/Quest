@@ -1,6 +1,7 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
 import Header from "./Header";
+import Login from "./LoginRegister/Login";
 
 const AdminQuizDetail = () => {
   const location = useLocation();
@@ -10,7 +11,9 @@ const AdminQuizDetail = () => {
   ];
   console.log(detail);
   return (
-    <div className="main-detail">
+    <div>
+      
+    {detail !== undefined ? (<div className="main-detail">
       <Header />
       <div className="quiz-detail">
         <div>
@@ -80,6 +83,7 @@ const AdminQuizDetail = () => {
           </tbody>
         </table>
       </div>
+    </div>) : (<Login />)}
     </div>
   );
 };
