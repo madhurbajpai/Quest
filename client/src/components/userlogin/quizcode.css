@@ -1,61 +1,141 @@
-.codecontainer {
+/* VerificationCode.css */
+
+* {
+  font-size: 22px;
+  font-weight: bolder;
+}
+
+.verification-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-top: 20px;
+  padding: 20px;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 60%;
+  margin-left: auto;
+  margin-right: auto;
+  height: 280px;
+  box-sizing: border-box;
+  border-bottom: 2px solid #333;
+  border-top: 2px solid #333
   
-    max-width: 600px;
-    margin: auto;
-    width: 100%;
-    padding: 120px;
-    background-color: grey; 
-    border: 1px solid #ddd; 
-    border-radius: 8px; 
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
+}
+
+.quiz-history-container {
+  margin-top: 20px; /* Adjust margin as needed */
+  width: 90%;
+  background-color: white;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+
+.quiz-history-heading {
+  text-align: center;
+  margin-top: 100px; /* Adjust the margin as needed */
+  color: #333; /* Color of the heading */
+}
+
+/* Style for each quiz history item */
+.quiz-history-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+   /* Adjust margin between quiz history items */
+}
+
+.quiz-history-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px; /* Adjust the gap between quiz history items as needed */
+  justify-content: space-between;
+}
+
+
+.quiz-history-item button {
+  background-color: #4caf50;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.quiz-history-item button:hover {
+  background-color: #45a049;
+}
+
+.codeheader {
   
-  .codeheader {
-    text-align: center;
-    margin-bottom: 40px;
-  }
-  
-  .codetext {
-    font-size: 30px;
-    color: #333; 
-  }
-  
-  .codeunderline {
-    width: 100px;
-    height: 3px;
-    background-color: #333; 
-    margin: 10px auto;
-  }
-  
-  .codeinputs {
-    margin-bottom: 30px;
-  }
-  
-  .codeinput {
-    margin-bottom: 30px;
-  }
-  
-  .codeinput {
-    width: 100%;
-    padding: 30px;
-    border: 1px solid #ccc; 
-    border-radius: 4px; 
-  }
-  
-  .codesubmit-container {
-    text-align: center;
-  }
-  
-  .codesubmit {
-    background-color: #4caf50; 
-    color: #fff; 
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s ease; 
-  }
-  
-  .codesubmit:hover {
-    background-color: #45a049; 
-  }
+  align-items: center;
+  text-align: center;
+  margin-bottom: 20px;
+
+}
+
+.codetext {
+  display: flex;
+  justify-items: center;
+  align-items: center;
+  font-size: 24px;
+  color: #333;
+}
+
+.codeunderline {
+  width: 100%;
+  height: 3px;
+  background-color: #333;
+  margin: 10px 0;
+}
+
+.codeinput {
+  width: 100%;
+  text-align: center;
+  font-size: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.codeinput input {
+  width: 100%;
+  font-size: 24px; /* Adjust the font size for the code text */
+  text-align: center; /* Center the code text */
+  padding: 10px;
+  border: none;
+  outline: none; /* Remove the default input outline */
+}
+
+.codesubmit-container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.codesubmit {
+  background-color: #4caf50;
+  color: #fff;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.codesubmit:hover {
+  background-color: #45a049;
+}
+
+.margin-below-codecontainer {
+  margin-bottom: 20px;
+}
