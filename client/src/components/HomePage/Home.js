@@ -15,7 +15,7 @@ const Home = () => {
           <img src={BannerBackground} alt="" />
         </div>
         <div className="home-text-section">
-          <h1 className="primary-heading">
+          <h1 className="primary-heading1">
           Welcome to our Quest website!🌟 
 
           </h1>
@@ -28,9 +28,6 @@ const Home = () => {
            Get Started !<FiArrowRight />{" "}
           </button>
         </div>
-        {/* <div className="home-image-section">
-          <img className="" src={BannerImage} alt="" />
-        </div> */}
       </div>
     </div>
   );

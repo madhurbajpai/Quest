@@ -2,6 +2,7 @@ import React, { useContext, useEffect, useState } from "react";
 import Header from "./Header";
 import { Link, useNavigate } from "react-router-dom";
 import "./AdminDash.css";
+import BannerBackground from "./home-banner-background.png";
 import LoginContext from "./CustomQuizz/context/LoginContext";
 import axios from "axios";
 import VisibilityIcon from "@mui/icons-material/Visibility";
@@ -57,82 +58,72 @@ const AdminDash = () => {
   };
 
   return (
-    <div>
-      {loginId ? (
-        <div className="admin-main">
+      <div>
+        {loginId?(<div className="admin-main">
           <Header />
+           <div className="home-bannerImage-container">
+          <img src={BannerBackground} alt="" />
+        </div>
           <div className="admin-info">
-            <h1 className="user-head">Welcome, {loginId.adminName}</h1>
+            <h1 className="user-head">Welcome to Dashboard</h1>   
+            {/* add {loginId.adminName} after Welcome */}
           </div>
-          <hr />
+          
           <div className="admin-btn">
-            <h1 className="history-head">Custom/Random Quizes</h1>
-            <div className="admin-btn-grp">
-              <button
-                type="button"
-                className="btn btn-primary"
-                onClick={() => navigate("/custom-quiz")}
-              >
-                Create New Quizz
-              </button>
-              <button
-                type="button"
-                className="btn btn-primary"
-                onClick={() => navigate("/random-quiz")}
-              >
-                Create Random Quizz
-              </button>
-              <button onClick={() => console.log(quizDetail)}>check</button>
-            </div>
+            {/* <h1 className="history-head">Custom/Random Quizes</h1> */}
+          <div className="admin-btn-grp">
+            <button type="button" className="btn btn-primary1" onClick={()=>navigate('/custom-quiz')}>
+              Create New Quizz
+            </button>
+            <button type="button" className="btn btn-primary1" onClick={()=>navigate('/random-quiz')}>
+              Create Random Quizz
+            </button>
           </div>
-          <hr />
+          </div>
+          {/* <hr /> */}
           <div className="admin-history">
-            <h1 className="history-head">Previous Quizes</h1>
-            {quizDetail !== undefined ? (
-              <table
-                className="table table-striped table-hover"
-                id="table-history"
-              >
-                <thead>
-                  <tr>
-                    <th scope="col">S. No.</th>
-                    <th scope="col">Title</th>
-                    <th scope="col">Date</th>
-                    <th scope="col">Duration</th>
-                    <th scope="col">Attempted</th>
-                    <th scope="col">View</th>
-                    <th scope="col">Delete</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {quizDetail.map((quiz, i) => (
-                    <tr key={i}>
-                      <th scope="row">{i + 1}</th>
-                      <td>{quiz.name}</td>
-                      <td>{quiz.dateCreated.split("T")[0]}</td>
-                      <td>{quiz.duration} mins</td>
-                      <td>{quiz.attemptedBy.length}</td>
-                      <td>
-                        <VisibilityIcon
-                          onClick={() => {
+            <h1 className="history-head">Your Previous Quizes :</h1>
+            {quizDetail !== undefined?(
+            <table
+              className="table"
+              id="table-history"
+            >
+              <thead>
+                <tr>
+                  <th scope="col">S. No.</th>
+                  <th scope="col">Title</th>
+                  <th scope="col">Date</th>
+                  <th scope="col">Duration</th>
+                  <th scope="col">Attempted</th>
+                  <th scope="col">Manage</th>
+                  <th scope="col">Delete</th>
+                </tr>
+              </thead>
+              <tbody>
+                {
+              quizDetail.map((quiz,i)=>(
+                <tr key={i}>
+                  <th scope="row">{i+1}</th>
+                  <td>{quiz.name}</td>
+                  <td>{quiz.dateCreated.split('T')[0]}</td>
+                  <td>{quiz.duration} mins</td>
+                  <td>{quiz.attemptedBy.length}</td>
+                  <td>
+                    <VisibilityIcon onClick={() => {
                             viewQuiz(i);
-                          }}
-                        />
-                      </td>
-                      <td>
-                        <DeleteIcon
-                          onClick={() => {
-                            deleteQuiz(i);
-                          }}
-                        />
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            ) : (
-              <div>No Quiz History</div>
-            )}
+                          }}/>
+                  </td>
+                  <td>
+                    <DeleteIcon onClick={()=>{deleteQuiz(i)}}/>
+                  </td>
+                </tr>
+              ))
+                }
+                
+                
+              </tbody>
+            </table>):(<div>No Quiz History</div>)}
+            
           </div>
         </div>
       ) : (

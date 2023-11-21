@@ -49,7 +49,8 @@ export const getUser = async (req,res) => {
         if(!isPasswordValid){
             return res.status(200).json({message: "Invalid Password"});
         }
-        return res.status(201).json({message: "User login successfully"});
+        // console.log(user);
+        return res.status(201).json({userInfo: user,message: "User login successfully"});
 
     }catch(error){
         console.log('Some error occured during getting user', error);
