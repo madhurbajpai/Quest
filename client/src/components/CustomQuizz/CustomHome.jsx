@@ -1,6 +1,7 @@
 import React, { useContext, useState, useRef, useCallback } from "react";
 import Header from "../Header.jsx";
 import Forms from "./Forms/Forms.jsx";
+import BannerBackground from "./home-banner-background.png";
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import "./CustomQuizz.css";
 import { IconButton } from "@mui/material";
@@ -104,10 +105,13 @@ const CustomHome = () => {
   return (
     <div>
       <Header />
-      <div className="custom-mid">
+      <div className="home-bannerImage-container">
+          <img src={BannerBackground} alt="" />
+        </div>
+      <div className="custom-mid" >
         <div className="custom-head">
           <div className="one">
-            <div className="input-field">
+            <div className="input1">
               <label>Name </label>
               <input
                 className="inp"
@@ -126,7 +130,7 @@ const CustomHome = () => {
             </div>
           </div>
           <div className="one">
-            <div className="input-field">
+            <div className="input1">
               <label>Start Time</label>
               <input
                 className="inp"
@@ -143,8 +147,8 @@ const CustomHome = () => {
               />
             </div>
           </div>
-          <div className="one" style={{ width: "50%" }}>
-            <div className="input-field">
+          <div className="one">
+            <div className="input1">
               <label>Duration</label>
               <input
                 className="inp"
@@ -161,22 +165,22 @@ const CustomHome = () => {
 
       <Forms />
 
-      <div className="custom-final" style={{display:"flex", justifyContent: "center", alignItems:"center", marginBottom:"20px", backgroundColor: "#22092c", flexDirection: "column"}}>
+      <div className="custom-final" >
         <div>
-          {!isCreated? (<button style={{ marginTop: "30px", marginBottom:"30px", backgroundColor: "#13aa52" }} class="button-30" role="button" onClick={createQuiz}>
+          {!isCreated? (<button  class="button-32" role="button" onClick={createQuiz}>
           Create Quiz
         </button>): ""}
           
-        {isCreated ?(<button style={{ marginTop: "30px", marginLeft: "30px", marginBottom:"30px", backgroundColor: "#13aa52" }} class="button-30" role="button" onClick={getQuizCode}>
+        {isCreated ?(<button  class="button-32" role="button" onClick={getQuizCode}>
           Get Quiz Code
         </button>): "" }
         
         </div>
         {isgetCode? (<div>
-        <input type="text" value={quizId} style={{marginBottom: "40px", padding: "5px", textAlign: "center", width:"300px"}} ref={quizCodeRef}/>
-        <IconButton style={{backgroundColor:"white", marginLeft: "1px", marginBottom: "2px", borderRadius: "0%"}}> {!iscopied ? (<ContentCopyIcon onClick={copyquizCodeToClipboard}/>): (<DoneAllIcon />)} </IconButton>
+        <input type="text" value={quizId}ref={quizCodeRef}/>
+        <IconButton > {!iscopied ? (<ContentCopyIcon onClick={copyquizCodeToClipboard}/>): (<DoneAllIcon />)} </IconButton>
         </div>): ""}
-        <div style={{height: "60px"}}></div>
+        <div ></div>
       </div>
     </div>
   );

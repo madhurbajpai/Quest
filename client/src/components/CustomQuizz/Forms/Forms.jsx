@@ -136,7 +136,7 @@ const Forms = () => {
   }
 
   return (
-    <div className="form-main">
+    <div className="form-main"  style={{marginTop: "-10px"}}>
       <div className="question-boxes">
         {questions.map((ques, i) => (
           <div key={i}>

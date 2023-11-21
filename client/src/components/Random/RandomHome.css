@@ -1,19 +1,20 @@
 
 body {
-    font-family: 'Roboto', sans-serif;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
     background-color: rgb(49, 30, 83); 
     margin: 0;
     padding: 0;
 }
 
 .head {
-    font-size: 35px;
+    font-size: 55px;
     font-weight: bold;
+    margin-right: 35%;
     margin-bottom: 20px;
-    background-color: rgb(49, 30, 83);
+    background-color: rgb(249, 248, 251);
     text-align: center;
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    color: #fff;
+    font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    color: #de5917;
 }
 
 .auth-form-container1 {
@@ -52,11 +53,11 @@ body {
 
 .button-31 {
     appearance: none;
-    background-color: rgb(49, 30, 83);
+    background-color: rgb(232, 110, 10);
     border-radius: 40px;
     border: none;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    color: #fff;
+    box-shadow: 0 4px 6px rgba(237, 5, 5, 0.1);
+    color:white;
     cursor: pointer;
     font-family: "JetBrains Mono", monospace;
     height: 48px;
@@ -67,7 +68,6 @@ body {
     text-decoration: none;
     transition: background-color 0.3s, transform 0.15s;
     user-select: none;
-    -webkit-user-select: none;
     touch-action: manipulation;
     white-space: nowrap;
     will-change: background-color, transform;
@@ -105,6 +105,7 @@ body {
 
 label {
     font-weight: bold;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     color: #333;
 }
 

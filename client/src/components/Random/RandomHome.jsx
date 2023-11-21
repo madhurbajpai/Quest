@@ -2,6 +2,7 @@ import React, { useContext, useState } from "react";
 import Header from "../Header";
 import axios from 'axios';
 import "./RandomHome.css";
+import BannerBackground from "./home-banner-background.png";
 import LoginContext from "../CustomQuizz/context/LoginContext";
 const RandomHome = () => {
   const [data, setData] = useState([]);
@@ -129,7 +130,9 @@ const RandomHome = () => {
         Create Random Quizz
       </div>
     <div className="body1">
-   
+    <div className="home-bannerImage-container">
+          <img src={BannerBackground} alt="" />
+        </div>
       <div className="auth-form-container1">
       
       <hr />
