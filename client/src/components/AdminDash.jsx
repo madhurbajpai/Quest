@@ -1,17 +1,18 @@
 import React, { useContext, useEffect, useState } from "react";
 import Header from "./Header";
-import {useNavigate} from 'react-router-dom'
+import { Link, useNavigate } from "react-router-dom";
 import "./AdminDash.css";
 import BannerBackground from "./home-banner-background.png";
 import LoginContext from "./CustomQuizz/context/LoginContext";
 import axios from "axios";
-import VisibilityIcon from '@mui/icons-material/Visibility';
-import DeleteIcon from '@mui/icons-material/Delete';
+import VisibilityIcon from "@mui/icons-material/Visibility";
+import DeleteIcon from "@mui/icons-material/Delete";
+import Login from "./LoginRegister/Login";
 const AdminDash = () => {
   const [quizDetail, setQuizDetail] = useState([]);
   const navigate = useNavigate();
 
-  const {loginId} = useContext(LoginContext);
+  const { loginId } = useContext(LoginContext);
 
   useEffect(() => {
     if (loginId && loginId.quizIds) {
@@ -23,30 +24,38 @@ const AdminDash = () => {
 
   const deleteQuiz = async (i) => {
     // console.log(loginId.quizIds, loginId.quizIds[i]);
-    const response = await axios.post('http://localhost:8000/delete-quiz',{
-        quizId: loginId.quizIds[i]
-    })
+    const response = await axios.post("http://localhost:8000/delete-quiz", {
+      quizId: loginId.quizIds[i],
+    });
 
-    if(response){
-      window.alert('Quiz Deleted successfully')
+    if (response) {
+      window.alert("Quiz Deleted successfully");
       getHistory();
     }
-  }
+  };
 
   const getHistory = async () => {
     // console.log('here is login id',loginId.adminId)
-    try{
-      const response = await axios.post('http://localhost:8000/get-quizzes',{
-        quizIds: loginId.quizIds
-      })
-      if(response){
+    try {
+      const response = await axios.post("http://localhost:8000/get-quizzes", {
+        quizIds: loginId.quizIds,
+      });
+      if (response) {
         setQuizDetail(response.data.quizzes);
         // console.log(quizDetail);
       }
-    }catch(error){
-      console.log('Some Error Occured getting quiz history',error);
+    } catch (error) {
+      console.log("Some Error Occured getting quiz history", error);
     }
-  }
+  };
+
+  const viewQuiz = (i) => {
+    const detail = {
+      adminId: loginId.adminId,
+      quiz: quizDetail[i],
+    };
+    navigate("/detail-quiz", { state: { detail } });
+  };
 
   return (
       <div>
@@ -114,9 +123,11 @@ const AdminDash = () => {
             </table>):(<div>No Quiz History</div>)}
             
           </div>
-        </div>):(<div>First Login Please</div>)}
-        
         </div>
+      ) : (
+        <Login />
+      )}
+    </div>
   );
 };
 

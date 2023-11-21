@@ -13,7 +13,7 @@ const Home = () => {
           <img src={BannerBackground} alt="" />
         </div>
         <div className="home-text-section">
-          <h1 className="primary-heading">
+          <h1 className="primary-heading1">
           Welcome to our Quest website!🌟 
 
           </h1>

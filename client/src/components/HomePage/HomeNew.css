@@ -95,8 +95,8 @@
     justify-content: center;
     align-items: flex-start;
   }
-  .primary-heading {
-    font-size: clamp(2rem, 5vw, 4rem);
+  .primary-heading1 {
+    font-size: ;
     color: #4c4c4c;
     /* line-height: 5rem; */
     max-width: 600px;
