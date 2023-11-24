@@ -1,13 +1,24 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import './Instruction.css'
+import { useLocation, useNavigate } from 'react-router-dom';
+import UserQuizContext from '../CustomQuizz/context/UserQuizContext';
 
-const Instruction = ({ onProceed }) => {
+const Instruction = () => {
+  const navigate = useNavigate();
   const [proceedClicked, setProceedClicked] = useState(false);
-
+  // const {setuserQuiz} = useContext(UserQuizContext)
+  const location = useLocation();
+  const {detail} = location.state || {};
   const handleProceedClick = () => {
-    setProceedClicked(true);
-    
-    onProceed();
+    // setuserQuiz({
+    //   userId: detail.userId,
+    //   // userName: detail.userName,
+    //   // quiz: detail.quiz
+    // })
+    const newDetail = detail
+    // navigate("/quiz");
+    navigate('/quiz', {state: {newDetail}})
+    // console.log(detail);
   };
 
   return (
@@ -23,7 +34,9 @@ const Instruction = ({ onProceed }) => {
         <li>There is a timer for this quiz.</li>
         <li>Click the "Proceed" button when you are ready to start the quiz.</li>
       </ul>
-
+      <div className="quiz-detail-user">
+        <div>{}</div>
+      </div>
       {proceedClicked ? (
         <p>Proceed button clicked! Add your custom content or logic here.</p>
       ) : (

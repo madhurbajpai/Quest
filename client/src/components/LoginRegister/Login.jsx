@@ -42,6 +42,8 @@ const Login = (props) => {
           setisError(false);
         }
         if (response.data.message === "User does not exist") {
+          // window.alert('User does not exist')
+          setisError(true)
           setError(response.data.message);
           return;
         } else if (response.data.message === "Invalid Password") {
@@ -49,10 +51,10 @@ const Login = (props) => {
           setError("Invalid email or Password");
           return ;
         }
-        setloginId({userId: response.data.userInfo._id, userName: response.data.userInfo.name, userEmail: response.data.userInfo, quizIds: response.data.userInfo.attemptedQuizes}) 
+        setloginId({userId: response.data.userInfo._id, userName: response.data.userInfo.name, userEmail: response.data.userInfo.email, quizIds: response.data.userInfo.attemptedQuizes}) 
         // console.log('here is data recieved',response)
 
-        navigate('/code')
+        navigate('/user')
         // window.alert("User Login successfully");
       } catch (error) {
         setisError(true);
@@ -158,7 +160,7 @@ const Login = (props) => {
 
               <button
                 style={{ marginTop: "30px" }}
-                class="button-30"
+                className="button-30"
                 role="button"
                 onClick={check}
               >

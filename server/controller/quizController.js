@@ -2,10 +2,15 @@ import mongoose from "mongoose";
 import Admin from "../model/Admin.js";
 import Quiz from "../model/Quiz.js";
 import User from "../model/User.js";
-// import {v4 as uuidv4} from 'uuid';
+import Question from "../model/Question.js";
+import { Types as mongooseTypes } from "mongoose";
+import Result from "../model/Result.js";
+
+const { ObjectId } = mongooseTypes;
+
 export const addQuiz = async (req, res) => {
   try {
-    console.log(req.body);
+    // console.log(req.body);
     const {
       name,
       description,
@@ -27,12 +32,22 @@ export const addQuiz = async (req, res) => {
       !createdBy ||
       !questions
     ) {
-      return res.status(422).json({ message: "Something is missing" });
+      return res.json({ status: 422, message: "Something is missing" });
     }
+    // console.log('created by...',createdBy)
+    //  console.log('questions received...',questions);
+    const questionIds = await Promise.all(
+      questions.map(async (question, i) => {
+        // console.log('question ',i+1, question);
+        const newQuestion = new Question(question);
+        // console.log('here is new question', newQuestion)
+        const savedQuestion = await newQuestion.save();
+        return savedQuestion._id;
+      })
+    );
+    // console.log('questions ids ...',questionIds)
 
-    // const quizId = uuidv4();
     const quiz = new Quiz({
-      // id: quizId,
       name,
       description,
       dateCreated,
@@ -41,7 +56,7 @@ export const addQuiz = async (req, res) => {
       duration,
       createdBy,
       attemptedBy,
-      questions,
+      questions: questionIds,
     });
 
     const savedQuiz = await quiz.save();
@@ -49,27 +64,24 @@ export const addQuiz = async (req, res) => {
     if (savedQuiz) {
       const quizId = savedQuiz._id;
 
-      const adminId = savedQuiz.createdBy; // Assuming createdBy is the admin's ID
+      const adminId = savedQuiz.createdBy;
       const admin = await Admin.findById(adminId);
 
       if (!admin) {
-        return res.status(404).json({ message: "Admin not found" });
+        return res.json({ status: 422, message: "Admin not found" });
       }
 
-      // Add the new quiz ID to the createdQuizzes array
-      console.log(admin);
+      // console.log(admin);
 
       admin.createdQuizes.push(quizId);
       // Save the updated admin document
       await admin.save();
 
-      return res
-        .status(201)
-        .json({
-          quiz: savedQuiz,
-          quizId: quizId,
-          message: "Quiz created successfully",
-        });
+      return res.status(201).json({
+        quiz: savedQuiz,
+        quizId: quizId,
+        message: "Quiz created successfully",
+      });
     }
     return res
       .status(422)
@@ -83,27 +95,32 @@ export const addQuiz = async (req, res) => {
 };
 
 export const getQuiz = async (req, res) => {
+  // console.log('here i am');
   try {
-    const quizId = req.params.quizId;
+    const quizId = req.body.quizId;
+    // console.log(req.body,req.body.quizId)
     const isValidQuiz = await Quiz.findById(quizId);
-    console.log(isValidQuiz);
+    // console.log(isValidQuiz);
     if (!isValidQuiz) {
-      return res.status(422).json({ message: "Invalid QuizId" });
+      console.log("here");
+      return res.json({ status: 422, message: "Invalid QuizId" });
     }
 
     const quiz = await Quiz.findById(quizId)
       .populate("createdBy", "name")
-      .populate("attemptedBy", "name");
+      .populate("attemptedBy", "name")
+      .populate("questions", "");
 
     if (!quiz) {
-      return res.status(422).json({ message: "Quiz Not Found" });
+      return res.json({ status: 422, message: "Quiz Not Found" });
     }
 
     return res.status(201).json({ quiz });
   } catch (error) {
-    return res
-      .status(422)
-      .json({ message: "Some error occured while getting quiz" });
+    return res.json({
+      status: 422,
+      message: "Some error occured while getting quiz",
+    });
   }
 };
 
@@ -138,34 +155,119 @@ export const deleteQuiz = async (req, res) => {
       return res.json({ status: 422, message: "QuizId is missing" });
     }
 
-    console.log(quizId)
+    // console.log(quizId)
 
     const quiz = await Quiz.findById(quizId);
 
-    console.log(quiz);
+    // console.log('finded quiz...',quiz.attemptedBy);
     if (!quiz) {
       return res.json({ status: 422, message: "Cannot find Quiz" });
     }
     const response = await Quiz.deleteOne({ _id: quizId });
-
+    // console.log('response...',response)
     if (response.deletedCount === 0) {
       return res.json({ status: 422, message: "Cannot find Quiz" });
     }
 
+    const questionIds = quiz.questions.map((question) => question._id);
+    // console.log('questions',questionIds);
+    await Question.deleteMany({ _id: { $in: questionIds } });
+
+    const admin = await Admin.findOne({
+      _id: quiz.createdBy,
+    });
+    // const users = await User.findOne({_id: quiz.attemptedBy[0]})
+    // console.log("users...",users);
     await Admin.updateOne(
-      { createdQuizes: quizId },
-      { $pull: { createdQuizes: quizId } }
+      { _id: admin._id },
+      { $pull: { createdQuizes: { _id: new ObjectId(quizId) } } }
     );
 
-    // Update User's attemptedQuizes array
     await User.updateMany(
       { "attemptedQuizes.quiz": quizId },
       { $pull: { attemptedQuizes: { quiz: quizId } } }
     );
 
+    const result = await Result.deleteOne({quiz: quizId});
+    if(result.deletedCount === 0){
+      return res.json({status: 422, message: "Result cannot be deleted"});
+    }
+
     return res.json({ status: 201, message: "Deleted Successfully" });
   } catch (error) {
     console.log(error);
     return res.json({ status: 422, message: "Cannot delete Quiz" });
+  }
+};
+
+export const calculateScores = async (req, res) => {
+  try {
+    const { quizId } = req.body;
+
+    // Fetch quiz information with populated data
+    const quiz = await Quiz.findById(quizId).populate({
+      path: "attemptedBy",
+      populate: {
+        path: "attemptedQuizes.quiz",
+        model: "Quiz",
+        populate: {
+          path: "questions",
+          model: "Question",
+        },
+      },
+    });
+
+    if (!quiz) {
+      return res.status(404).json({ message: "Quiz not found" });
+    }
+
+    // Calculate scores for each user
+    await Promise.all(
+      quiz.attemptedBy.map(async (user) => {
+        let score = 0;
+
+        // Get the filtered questions for the specific quiz
+        const filteredQuestions = user.attemptedQuizes
+          .filter((attemptedQuiz) => attemptedQuiz.quiz._id.toString() === quizId)
+          .map((attemptedQuiz) => attemptedQuiz.quiz.questions)
+          .flat();
+
+        // Get the marked options for the specific quiz
+        const markedOptions = user.attemptedQuizes
+          .filter((attemptedQuiz) => attemptedQuiz.quiz._id.toString() === quizId)
+          .map((attemptedQuiz) => attemptedQuiz.markedOptions)
+          .flat();
+
+        // Iterate through the questions and calculate score
+        filteredQuestions.forEach((question) => {
+          const userSelectedOption = markedOptions.find(
+            (option) => option.question.toString() === question._id.toString()
+          );
+
+          if (
+            userSelectedOption &&
+            userSelectedOption.selectedOption === question.correctAnswer
+          ) {
+            score += question.marks;
+          }
+        });
+
+        // Update the user's score in the database
+        const index = user.attemptedQuizes.findIndex(
+          (attemptedQuiz) => attemptedQuiz.quiz._id.toString() === quizId
+        );
+
+        if (index !== -1) {
+          user.attemptedQuizes[index].score = score;
+          await user.save();
+        }
+      })
+    );
+
+    return res
+      .json({ status: 201,message: "Scores calculated and updated successfully" });
+  } catch (error) {
+    console.error("Error calculating scores:", error);
+    return res.status(500).json({ message: "Internal Server Error" });
   }
 };
