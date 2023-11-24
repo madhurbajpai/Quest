@@ -16,24 +16,27 @@ import InfoIcon from "@mui/icons-material/Info";
 import CommentRoundedIcon from "@mui/icons-material/CommentRounded";
 import PhoneRoundedIcon from "@mui/icons-material/PhoneRounded";
 import ShoppingCartRoundedIcon from "@mui/icons-material/ShoppingCartRounded";
+import { useNavigate } from "react-router-dom";
 
 const Navbar = () => {
+  const navigate = useNavigate();
   const [openMenu, setOpenMenu] = useState(false);
   const menuOptions = [
     {
       text: "Home",
       icon: <HomeIcon />,
+      route: ''
     },
     {
       text: "About",
       icon: <InfoIcon />,
+      route: 'about'
     },
-    
     {
       text: "Contact",
       icon: <PhoneRoundedIcon />,
+      route: 'contact'
     },
-  
   ];
   return (
     <nav>
@@ -41,9 +44,14 @@ const Navbar = () => {
         <img className="logo" src={Logo} alt="" />
       </div>
       <div className="navbar-links-container">
-        <a href="">Home</a>
-        <a href="">About</a>
-        <a href="">Contact</a>
+        <a onClick={()=>navigate('/')} style={{cursor: 'pointer'}}>Home</a>
+        <a onClick={()=>navigate('/about')} style={{cursor: 'pointer'}}>About</a>
+        {/* <a href="">Testimonials</a> */}
+        <a onClick={()=>navigate('/contact')} style={{cursor: 'pointer'}}>Contact</a>
+        {/* <a href="">
+          <BsCart2 className="navbar-cart-icon" />
+        </a> */}
+        {/* <button className="primary-button">Bookings Now</button> */}
       </div>
       <div className="navbar-menu-container">
         <HiOutlineBars3 onClick={() => setOpenMenu(true)} />
@@ -60,7 +68,7 @@ const Navbar = () => {
               <ListItem key={item.text} disablePadding>
                 <ListItemButton>
                   <ListItemIcon>{item.icon}</ListItemIcon>
-                  <ListItemText primary={item.text} />
+                  <ListItemText primary={item.text} onClick={()=>navigate(`/${item.route}`)}/>
                 </ListItemButton>
               </ListItem>
             ))}

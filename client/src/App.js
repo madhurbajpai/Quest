@@ -14,6 +14,12 @@ import AdminQuizDetail from './components/AdminQuizDetail';
 import HomeNew from './components/HomePage/HomeNew';
 import Instruction from './components/userlogin/Instruction';
 import UserQuiz from './components/UserQuiz/User_Quiz';
+import About from './components/HomePage/About';
+import Contact from './components/HomePage/Contact';
+import UserQuizContextProvider from './components/CustomQuizz/context/UserQuizContextProvider';
+import Submitted from './components/UserQuiz/Submitted';
+import Result from './components/Results/Result';
+import Leaderboard from './components/Results/LeaderBoard';
 
 
 function App() {
@@ -29,10 +35,15 @@ function App() {
         <Route path='/admin' element={<AdminDash />}></Route>
         <Route path='/random-quiz' element={<RandomHome />}></Route>
         <Route path='/custom-quiz' element={<QuizContextProvider><CustomHome /></QuizContextProvider>}></Route>
-        <Route path='/code' element={<Quizcode />}></Route>
+        <Route path='/user' element={<Quizcode />}></Route>
         <Route path='/detail-quiz' element={<AdminQuizDetail />}></Route>
-        <Route path='/Instruct' element={<Instruction />}></Route>
-        <Route path='/user' element={<UserQuiz />}></Route>
+        <Route path='/instruction' element={<Instruction />}></Route>
+        <Route path='/quiz' element={ <UserQuizContextProvider><UserQuiz /></UserQuizContextProvider>}></Route>
+        <Route path='/about' element={<About />}></Route>
+        <Route path='/contact' element={<Contact />}></Route>
+        <Route path='/submitted' element={<Submitted />}></Route>
+        <Route path='/result' element={<Result />}></Route>
+        <Route path='/leaderboard' element={<Leaderboard />}></Route>
       </Routes>
     </Router>
     </LoginContextProvider>

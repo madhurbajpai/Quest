@@ -8,6 +8,8 @@ import { IconButton } from "@mui/material";
 import QuizContext from "./context/QuizContext.js";
 import DoneAllIcon from '@mui/icons-material/DoneAll';
 import axios from "axios";
+import LoginContext from "./context/LoginContext.js";
+import Login from "../LoginRegister/Login.jsx";
 const CustomHome = () => {
   const [isCreated, setisCreated] = useState(false);
   const [isgetCode, setisgetCode] = useState(false);
@@ -19,8 +21,8 @@ const CustomHome = () => {
   const [endTime, setendTime] = useState("");
   const [duration, setduration] = useState(0);
   const {form} = useContext(QuizContext);
-  const adminId = '655312338993e4b34a4d5f40';
-  const usersId = ['65531311c460e7e9d52d3e0d'];
+  const { loginId } = useContext(LoginContext);
+  const adminId = loginId !== null ? loginId.adminId: '';
   const quizCodeRef = useRef(null)
 
   const copyquizCodeToClipboard = useCallback(() => {
@@ -33,7 +35,7 @@ const CustomHome = () => {
   const getQuizCode = () =>{
     var newval = !isgetCode;
     setisgetCode(newval);
-    console.log(quizId)
+    // console.log(quizId)
     window.scrollTo({
       top: document.body.scrollHeight,
       behavior: 'smooth', // Optional: Adds a smooth scrolling effect
@@ -65,6 +67,7 @@ const CustomHome = () => {
     //     }
 
     //     console.log(response);
+    // console.log(loginId);
     if(!name || !startTime || !endTime || !duration){
     window.alert('Some fields are missing');
     return ;
@@ -78,7 +81,7 @@ const CustomHome = () => {
         endTime: endTime,
         duration: duration,
         createdBy: adminId,
-        attemptedBy: usersId,
+        attemptedBy: [],
         questions: form.questions.map((ques,i)=>(
           {
             questionText: ques.questionText,
@@ -94,7 +97,7 @@ const CustomHome = () => {
         setisCreated(true);
         window.alert('Quiz saved successfully...')
         setquizId(response.data.quizId);
-        console.log('quiz saved successfully...',response.data.quizId);
+        // console.log('quiz saved successfully...',response.data.quizId);
       }
     }
     catch(error){
@@ -104,6 +107,7 @@ const CustomHome = () => {
 
   return (
     <div>
+      {loginId ? (<div>
       <Header />
       <div className="home-bannerImage-container">
           <img src={BannerBackground} alt="" />
@@ -167,21 +171,23 @@ const CustomHome = () => {
 
       <div className="custom-final" >
         <div>
-          {!isCreated? (<button  class="button-32" role="button" onClick={createQuiz}>
+          {!isCreated? (<button  className="button-32" role="button" onClick={createQuiz}>
           Create Quiz
         </button>): ""}
           
-        {isCreated ?(<button  class="button-32" role="button" onClick={getQuizCode}>
+        {isCreated ?(<button  className="button-32" role="button" onClick={getQuizCode}>
           Get Quiz Code
         </button>): "" }
         
         </div>
         {isgetCode? (<div>
-        <input type="text" value={quizId}ref={quizCodeRef}/>
+        <input type="text" value={quizId}ref={quizCodeRef} disabled/>
         <IconButton > {!iscopied ? (<ContentCopyIcon onClick={copyquizCodeToClipboard}/>): (<DoneAllIcon />)} </IconButton>
         </div>): ""}
         <div ></div>
       </div>
+    </div>) : (<Login />)}
+    
     </div>
   );
 };

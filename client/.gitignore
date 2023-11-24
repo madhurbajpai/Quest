@@ -23,3 +23,5 @@ yarn-debug.log*
 yarn-error.log*
 
 src/components/customQuizz/Forms/Dummy.jsx
+src/components/UserQuiz/AttemptQuiz.jsx
+src/components/UserQuiz/Timer.jsx

@@ -20,7 +20,7 @@ const Login = (props) => {
 
   const check = async (e) => {
     e.preventDefault();
-    if (role == "user") {
+    if (role === "user") {
       setisError(false);
       if (!email || !pass) {
         setError("Some Fields are Missing!");
@@ -33,7 +33,7 @@ const Login = (props) => {
           email: email,
           password: pass,
         });
-        console.log(response);
+        // console.log(response);
         if (!response) {
           setisError(true);
           setError("Something went wrong");
@@ -42,14 +42,20 @@ const Login = (props) => {
           setisError(false);
         }
         if (response.data.message === "User does not exist") {
+          // window.alert('User does not exist')
+          setisError(true)
           setError(response.data.message);
           return;
-        } else if (response.data.message == "Invalid Password") {
+        } else if (response.data.message === "Invalid Password") {
           setisError(true)
           setError("Invalid email or Password");
           return ;
-        } 
-        window.alert("User Login successfully");
+        }
+        setloginId({userId: response.data.userInfo._id, userName: response.data.userInfo.name, userEmail: response.data.userInfo.email, quizIds: response.data.userInfo.attemptedQuizes}) 
+        // console.log('here is data recieved',response)
+
+        navigate('/user')
+        // window.alert("User Login successfully");
       } catch (error) {
         setisError(true);
         setError("An error occurred during login");
@@ -79,7 +85,7 @@ const Login = (props) => {
           setError(response.data.message);
           setisError(true);
           return;
-        } else if (response.data.message == "Invalid Password") {
+        } else if (response.data.message === "Invalid Password") {
           setisError(true);
           setError("Invalid email or Password");
           return ;
@@ -154,7 +160,7 @@ const Login = (props) => {
 
               <button
                 style={{ marginTop: "30px" }}
-                class="button-30"
+                className="button-30"
                 role="button"
                 onClick={check}
               >
