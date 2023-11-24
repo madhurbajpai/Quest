@@ -1,7 +1,9 @@
 import React, { useContext, useState } from 'react';
 import './Instruction.css'
+
 import { useLocation, useNavigate } from 'react-router-dom';
 import UserQuizContext from '../CustomQuizz/context/UserQuizContext';
+import Header from '../Header';
 
 const Instruction = () => {
   const navigate = useNavigate();
