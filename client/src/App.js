@@ -14,7 +14,7 @@ import AdminQuizDetail from './components/AdminQuizDetail';
 import HomeNew from './components/HomePage/HomeNew';
 import Instruction from './components/userlogin/Instruction';
 import UserQuiz from './components/UserQuiz/User_Quiz';
-
+import Result from './components/Result/Quizresult';
 
 function App() {
   // const [currentForm,serCurrentForm]=useState('login');
@@ -33,6 +33,7 @@ function App() {
         <Route path='/detail-quiz' element={<AdminQuizDetail />}></Route>
         <Route path='/Instruct' element={<Instruction />}></Route>
         <Route path='/user' element={<UserQuiz />}></Route>
+        <Route path='/result' element={<Result />}></Route>
       </Routes>
     </Router>
     </LoginContextProvider>

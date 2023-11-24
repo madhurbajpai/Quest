@@ -4,33 +4,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import './User_Quiz.css';
 import Header from "../Header";
 
-const questions = [
-    {
-        question: 'What is the capital of France?',
-        options: ['Berlin', 'Paris', 'Madrid', 'Rome'],
-        correctOption: 'Paris',
-    },
-    {
-        question: 'What is the capital of India',
-        options: ['Berlin', 'Paris', 'Delhi', 'Rome'],
-        correctOption: 'Delhi',
-    },
-    {
-        question: 'What is the largest mammal on Earth?',
-        options: ['Elephant', 'Blue Whale', 'Giraffe', 'Hippopotamus'],
-        correctOption: 'Blue Whale',
-    },
-    {
-        question: 'Who wrote "Romeo and Juliet"?',
-        options: ['Charles Dickens', 'William Shakespeare', 'Jane Austen', 'Mark Twain'],
-        correctOption: 'William Shakespeare',
-    },
-    {
-        question: 'What is the currency of Japan?',
-        options: ['Won', 'Yuan', 'Ringgit', 'Yen'],
-        correctOption: 'Yen',
-    }
-];
+
 
 const UserQuiz = () => {
     const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
@@ -40,7 +14,33 @@ const UserQuiz = () => {
     const [quizOver, setQuizOver] = useState(false);
     const [popupVisible, setPopupVisible] = useState(false);
 
-    
+    const questions = [
+        {
+            question: 'What is the capital of France?',
+            options: ['Berlin', 'Paris', 'Madrid', 'Rome'],
+            correctOption: 'Paris',
+        },
+        {
+            question: 'What is the capital of India',
+            options: ['Berlin', 'Paris', 'Delhi', 'Rome'],
+            correctOption: 'Delhi',
+        },
+        {
+            question: 'What is the largest mammal on Earth?',
+            options: ['Elephant', 'Blue Whale', 'Giraffe', 'Hippopotamus'],
+            correctOption: 'Blue Whale',
+        },
+        {
+            question: 'Who wrote "Romeo and Juliet"?',
+            options: ['Charles Dickens', 'William Shakespeare', 'Jane Austen', 'Mark Twain'],
+            correctOption: 'William Shakespeare',
+        },
+        {
+            question: 'What is the currency of Japan?',
+            options: ['Won', 'Yuan', 'Ringgit', 'Yen'],
+            correctOption: 'Yen',
+        }
+    ];
    
     
     const handlePrevious = () => {

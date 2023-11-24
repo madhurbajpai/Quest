@@ -20,7 +20,7 @@ const RandomHome = () => {
   const [duration, setDuration] = useState(0);
 
   const {loginId} = useContext(LoginContext);
-  const adminId = loginId.adminId;
+  const adminId = !loginId ? loginId.adminId: '';
   const usersId = ['6553124e8993e4b34a4d5f43','65531311c460e7e9d52d3e0d'];
 
 
