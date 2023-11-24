@@ -14,13 +14,13 @@ import AdminQuizDetail from './components/AdminQuizDetail';
 import HomeNew from './components/HomePage/HomeNew';
 import Instruction from './components/userlogin/Instruction';
 import UserQuiz from './components/UserQuiz/User_Quiz';
+
 import About from './components/HomePage/About';
 import Contact from './components/HomePage/Contact';
 import UserQuizContextProvider from './components/CustomQuizz/context/UserQuizContextProvider';
 import Submitted from './components/UserQuiz/Submitted';
 import Result from './components/Results/Result';
 import Leaderboard from './components/Results/LeaderBoard';
-
 
 function App() {
   // const [currentForm,serCurrentForm]=useState('login');
