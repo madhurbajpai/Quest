@@ -19,14 +19,29 @@ const userSchema = mongoose.Schema({
     {
       quiz: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "Quiz",
+        ref: 'Quiz',
+      },
+      markedOptions: [
+        {
+          question: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Question',
+          },
+          selectedOption: {
+            type: String,
+          }
+        }
+      ],
+      timeTaken: {
+        type: Number,
+        default: 0
       },
       score: {
         type: Number,
         default: 0
-      },
-    },
-  ],
+      }
+    }
+  ]
 });
 
 const User = mongoose.model("User", userSchema);

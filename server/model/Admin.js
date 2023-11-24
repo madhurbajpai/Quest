@@ -15,10 +15,22 @@ const adminSchema = mongoose.Schema({
     type: String,
     required: true,
   },
-  createdQuizes: {
-    type: Array,
-    of: mongoose.Schema.ObjectId
-  },
+  createdQuizes: [
+    {
+      quiz: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Quiz'
+      },
+      allowedUsers: {
+        type: Array,
+        of: mongoose.Schema.ObjectId
+      },
+      isResultPublished: {
+        type: Boolean,
+        default: false,
+      }
+    }
+  ]
 });
 
 const Admin = mongoose.model("Admin", adminSchema);

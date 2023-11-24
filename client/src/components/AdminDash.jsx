@@ -13,17 +13,20 @@ const AdminDash = () => {
   const navigate = useNavigate();
 
   const { loginId } = useContext(LoginContext);
+  console.log('Login ID on page load:', loginId);
 
   useEffect(() => {
+
+    
+
     if (loginId && loginId.quizIds) {
-      // console.log('Login ID on page load:', loginId.quizIds);
       getHistory();
-      // Add any additional logic you want to execute on page load here
+      
     }
   }, [loginId]);
 
   const deleteQuiz = async (i) => {
-    // console.log(loginId.quizIds, loginId.quizIds[i]);
+    console.log(loginId.quizIds, loginId.quizIds[i]);
     const response = await axios.post("http://localhost:8000/delete-quiz", {
       quizId: loginId.quizIds[i],
     });
@@ -37,6 +40,7 @@ const AdminDash = () => {
   const getHistory = async () => {
     // console.log('here is login id',loginId.adminId)
     try {
+      // console.log('here is quizids...',loginId.quizIds)
       const response = await axios.post("http://localhost:8000/get-quizzes", {
         quizIds: loginId.quizIds,
       });
@@ -49,17 +53,26 @@ const AdminDash = () => {
     }
   };
 
-  const viewQuiz = (i) => {
+  const viewQuiz = async(i) => {
+    console.log(quizDetail[i]._id)
+    const response = await axios.post('http://localhost:8000/get-quiz',{
+      quizId: quizDetail[i]._id
+    })
+    if(!response){
+      window.alert('Some Error Occured');
+      return ;
+      // console.log(response);
+    }
     const detail = {
       adminId: loginId.adminId,
-      quiz: quizDetail[i],
+      quiz: response.data.quiz,
     };
     navigate("/detail-quiz", { state: { detail } });
   };
 
   return (
       <div>
-        {!loginId?(<div className="admin-main">
+        {loginId?(<div className="admin-main">
           <Header />
            <div className="home-bannerImage-container">
           <img src={BannerBackground} alt="" />
@@ -109,7 +122,9 @@ const AdminDash = () => {
                   <td>{quiz.duration} mins</td>
                   <td>{quiz.attemptedBy.length}</td>
                   <td>
-                    <VisibilityIcon />
+                    <VisibilityIcon onClick={() => {
+                            viewQuiz(i);
+                          }}/>
                   </td>
                   <td>
                     <DeleteIcon onClick={()=>{deleteQuiz(i)}}/>

@@ -15,6 +15,7 @@ body {
     text-align: center;
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     color: #de5917;
+    background: transparent;
 }
 
 .auth-form-container1 {

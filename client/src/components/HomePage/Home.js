@@ -3,8 +3,10 @@ import BannerBackground from "./home-banner-background.png";
 // import BannerImage from "./home-banner-image.png";
 import Navbar from "./Navbar";
 import { FiArrowRight } from "react-icons/fi";
+import { Link, useNavigate } from "react-router-dom";
 
 const Home = () => {
+  const navigate = useNavigate();
   return (
     <div className="home-container">
       <Navbar />
@@ -22,7 +24,7 @@ const Home = () => {
           your journey to knowledge starts with a single tap!🏆
 
           </p>
-          <button className="secondary-button">
+          <button className="secondary-button" onClick={()=>{navigate('/register')}}>
            Get Started !<FiArrowRight />{" "}
           </button>
         </div>

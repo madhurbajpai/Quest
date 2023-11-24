@@ -77,10 +77,14 @@
     font-weight: 10px;
     font-size: 20px;
     padding: 10px;
+    border: transparent;
     text-align: left;
-    border-bottom: 0px solid #ddd;
+    /* border-bottom: 0px solid #ddd; */
   }
   
+  .table td{
+    background: transparent;
+  }
   .table th {
     background:transparent;
   }
