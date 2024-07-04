@@ -24,6 +24,7 @@ import Leaderboard from './components/Results/LeaderBoard';
 
 function App() {
   // const [currentForm,serCurrentForm]=useState('login');
+  console.log("hello");
   return (
     // <AdminDash />
     <LoginContextProvider>
