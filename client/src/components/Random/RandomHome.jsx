@@ -134,13 +134,15 @@ const RandomHome = () => {
   }
   return (
     <div>
+        <Header />
       {adminId !== '' ? (<div>
-      <Header />
-      <div className="head">Create Random Quizz</div>
-      <div className="body1">
-        <div className="home-bannerImage-container">
+    
+      <div className="home1-bannerImage-container">
           <img src={BannerBackground} alt="" />
         </div>
+      <div className="head">Create Random Quizz</div>
+    
+      <div className="body1">
         <div className="auth-form-container1">
           <hr />
           <div className="forms1">
